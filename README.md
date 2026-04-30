@@ -49,10 +49,10 @@ scelta dell’applicazione.
 ### Istruzioni per la consegna:
 Il gruppo dovrà organizzare il proprio repository GitHub oppure preparare un archivio .zip denominato
 Gruppo_IS_IDGruppo, contenente le seguenti directory e file:
-  1. Documentation/: file della documentazione del progetto sia in formato.doc che .pdf, basati sul
+  1. **Documentation/**: file della documentazione del progetto sia in formato.doc che .pdf, basati sul
 template fornito dalla docente.
-  2. VisualParadigm/: il file .vpp del progetto Visual Paradigm.
-  3. JavaProject/: la directory contenente il progetto Java con l’implementazione delle funzionalità
+  2. **VisualParadigm/**: il file .vpp del progetto Visual Paradigm.
+  3. **JavaProject/**: la directory contenente il progetto Java con l’implementazione delle funzionalità
 richieste e i casi di test.
 
 Per effettuare la consegna, lo studente responsabile del gruppo dovrà rispondere all’attività assegnata su Teams
