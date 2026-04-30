@@ -54,6 +54,7 @@ template fornito dalla docente.
   2. VisualParadigm/: il file .vpp del progetto Visual Paradigm.
   3. JavaProject/: la directory contenente il progetto Java con l’implementazione delle funzionalità
 richieste e i casi di test.
+
 Per effettuare la consegna, lo studente responsabile del gruppo dovrà rispondere all’attività assegnata su Teams
 consegnando 1) una cartella compressa denominata "Gruppo_IS_IDGruppo contenente tutti i file e 2) il link al
 repository GitHub in cui è stato sviluppato il progetto.
