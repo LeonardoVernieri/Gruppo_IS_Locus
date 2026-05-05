@@ -41,6 +41,7 @@ Il sistema dovrà essere accessibile via web sia da desktop che da dispositivi m
 intuitiva e responsiva. È previsto un sistema di notifiche che avvisi gli studenti della conferma della prenotazione,
 di eventuali annullamenti e dell’approssimarsi dell’orario prenotato. Il sistema dovrà inoltre garantire la protezione
 dei dati personali e una corretta gestione dei permessi e delle visibilità tra studenti e bibliotecari.
+
 Per tale sistema, il team realizzi un progetto secondo il facsimile fornito dal docente, progetti la base di dati in
 maniera completa popolandola con dei dati d’esempio, ed implementi il progetto in linguaggio Java. L’analisi dei
 requisiti e la progettazione di alto livello del sistema dovrà essere svolta dal team completo, mentre ogni membro
