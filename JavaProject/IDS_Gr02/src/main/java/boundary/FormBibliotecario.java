@@ -1,5 +1,5 @@
 package boundary;
-import stub.BibliotecarioStub;
+import control.BibliotecarioStub;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +19,7 @@ public class FormBibliotecario extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         pack();
+        
         setLocationRelativeTo(null);
 
         btnCrea.addActionListener(new ActionListener() {
