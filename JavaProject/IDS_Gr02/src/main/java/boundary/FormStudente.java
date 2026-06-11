@@ -45,7 +45,9 @@ public class FormStudente {
         effettuaPrenotazioneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FormConsultaFasceOrarie.consultaFasceOrarieRender(frame);
+                FormConsultaFasceOrarie frameConsultaFasceOrarie =  new FormConsultaFasceOrarie();
+                frameConsultaFasceOrarie.setVisible(true);
+                frame.dispose();
             }
         });
     }

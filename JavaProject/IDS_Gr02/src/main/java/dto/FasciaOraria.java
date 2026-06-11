@@ -1,4 +1,4 @@
-package entity;
+package dto;
 
 import java.time.LocalTime;
 
@@ -11,8 +11,7 @@ public class FasciaOraria {
         this.oraFine = oraFine;
     }
 
-    public LocalTime getOraInizio() { return oraInizio; }
-    public LocalTime getOraFine() { return oraFine; }
+
 
     @Override
     public String toString() {
@@ -21,4 +20,6 @@ public class FasciaOraria {
 
     public LocalTime getInizio() { return oraInizio; }
     public LocalTime getFine() { return oraFine; }
+    public LocalTime getOraInizio() { return oraInizio; }
+    public LocalTime getOraFine() { return oraFine; }
 }

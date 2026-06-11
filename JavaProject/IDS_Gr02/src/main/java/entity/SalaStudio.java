@@ -1,6 +1,7 @@
 package entity;
 
 import database.GestorePersistenza;
+import dto.FasciaOraria;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.*;
 public class SalaStudio{
 
     @Transient
-    private GestorePersistenza  gestorePersistenza;
+    private GestorePersistenza gestorePersistenza;
 
 
     @Id
@@ -31,6 +32,11 @@ public class SalaStudio{
     @OneToMany(mappedBy = "salaStudio")
     private List<Postazione> postazioni = new ArrayList<>();
 
+    @PostLoad
+    public void init(){
+        gestorePersistenza = new GestorePersistenza();
+    }
+
     public SalaStudio(){}
 
     public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura) {
@@ -39,8 +45,12 @@ public class SalaStudio{
         this.numeroPostazioni = numeroPostazioni;
         this.orarioApertura = orarioApertura;
         this.orarioChiusura = orarioChiusura;
+        init();
     }
 
+    public String getNome() {
+        return nome;
+    }
 
     public List<Postazione> getPostazioni() {
         return gestorePersistenza.cercaPerCampo(Postazione.class, "salaStudio", this);
@@ -57,19 +67,14 @@ public class SalaStudio{
         return fasce;
     }
 
-    // Ritorna una lista di FasceOrarie in cui è possibile effettuare una prenotazione per la salaStudio
-    public List<FasciaOraria> getFasceOrarieDisponibili() {
-
-        List<FasciaOraria> fasceDisponibili = new ArrayList<>();
-
-        for (FasciaOraria f : this.getFasceOrarie()) {
-            for (Postazione p : this.postazioni) {
-                if (p.isDisponibile(f)) {
-                    fasceDisponibili.add(f);
-                    break;
-                }
+    // Ritorna il numero di postiLiberi per una data e una fascia oraria
+    public int getPostiLiberi(FasciaOraria f, LocalDate data) {
+        int count = 0;
+        for (Postazione p : getPostazioni()) {
+            if (p.isDisponibile(f, data)) {
+                count++;
             }
         }
-        return fasceDisponibili;
+        return count;
     }
 }

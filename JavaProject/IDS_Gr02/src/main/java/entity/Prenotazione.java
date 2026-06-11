@@ -1,5 +1,6 @@
 package entity;
 
+import dto.FasciaOraria;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ public class Prenotazione {
     private StatoPrenotazione statoPrenotazione;
 
     private LocalDate dataCheckIn;
+    private LocalDate data;
     private LocalTime inizioTempo;
     private LocalTime fineTempo;
 
@@ -42,6 +44,7 @@ public class Prenotazione {
     // Costruttore
     public Prenotazione() {}
 
+    public LocalDate getData() { return data; }
 
     public boolean isAttiva(){
         return stato == StatoPrenotazioneEnum.ATTIVA;
@@ -52,7 +55,7 @@ public class Prenotazione {
     }
 
     // Restituisce True se la fascia e' contenuta
-    public boolean overlaps(FasciaOraria fascia) {
+    public boolean isOverlap(FasciaOraria fascia) {
         return inizioTempo.isBefore(fascia.getFine()) && fineTempo.isAfter(fascia.getInizio());
     }
 }

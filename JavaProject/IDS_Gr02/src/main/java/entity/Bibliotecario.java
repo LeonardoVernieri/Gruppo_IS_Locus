@@ -30,14 +30,4 @@ public class Bibliotecario{
         gestorePersistenza = new GestorePersistenza();
     }
 
-
-    public SalaStudio getSaleStudioPerNome(String nome){
-        return gestorePersistenza.cercaPrimoPerCampi(SalaStudio.class, Map.of("nome", nome)) ;
-    }
-
-
-    public List<FasciaOraria> getFasceOrarieDisponibiliPerSala(String nomeSala, LocalDate data){
-        return getSaleStudioPerNome(nomeSala).getFasceOrarieDisponibili();
-    }
-
 }

@@ -1,11 +1,15 @@
 package entity;
 
 import database.GestorePersistenza;
+import dto.FasciaOraria;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
 public class Postazione {
 
     @Transient
@@ -37,12 +41,14 @@ public class Postazione {
         return(gestorePersistenza.cercaPerCampo(Prenotazione.class, "postazione", this));
     }
 
-    public boolean isDisponibile(FasciaOraria fascia) {
+    public boolean isDisponibile(FasciaOraria fascia, LocalDate date) {
         for (Prenotazione p : getPrenotazioni()) {
-            if ((p.isAttiva() || p.isConfermata()) && p.overlaps(fascia)) {
-                return true;
+            if ((p.isAttiva() || p.isConfermata())
+                    && p.isOverlap(fascia)
+                    && p.getData().equals(date)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

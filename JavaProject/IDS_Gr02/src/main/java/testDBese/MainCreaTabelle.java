@@ -3,14 +3,12 @@ package testDBese;
 import boundary.FormStudente;
 import database.GestorePersistenza;
 import entity.Bibliotecario;
-import entity.FasciaOraria;
+import dto.FasciaOraria;
 import entity.Postazione;
 import entity.SalaStudio;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.hibernate.internal.build.AllowSysOut;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MainCreaTabelle {
@@ -38,17 +36,9 @@ public class MainCreaTabelle {
         emf.close();
         System.out.println("Avvio di Hibernate completato.");
 
-        // new FormStudente();
+        new FormStudente();
 
         MainCreaTabelle.inizializzaDb();
-
-        Bibliotecario b = new Bibliotecario();
-
-        SalaStudio s = b.getSaleStudioPerNome("Sala1");
-
-        for(FasciaOraria f : s.getFasceOrarie()){
-            System.out.println(f);
-        }
     }
 
     // prova
