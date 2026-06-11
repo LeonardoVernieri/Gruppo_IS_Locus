@@ -1,25 +1,43 @@
 package entity;
 
+import database.GestorePersistenza;
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 public class Bibliotecario{
 
+
+    @Transient
+    private GestorePersistenza gestorePersistenza;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String codiceInterno;
+    private long codiceInterno;
 
     private String nome;
     private String cognome;
     private String email;
     private String password;
 
-    @OneToMany
-    private List<SalaStudio> saleStudio;
 
-    public Bibliotecario(){
+    @ManyToMany
+    private Set<SalaStudio> saleStudio = new HashSet<>(); // Set evita duplicati
 
+    public Bibliotecario() {
+        gestorePersistenza = new GestorePersistenza();
     }
+
+
+    public SalaStudio getSaleStudioPerNome(String nome){
+        return gestorePersistenza.cercaPrimoPerCampi(SalaStudio.class, Map.of("nome", nome)) ;
+    }
+
+
+    public List<FasciaOraria> getFasceOrarieDisponibiliPerSala(String nomeSala, LocalDate data){
+        return getSaleStudioPerNome(nomeSala).getFasceOrarieDisponibili();
+    }
+
 }
