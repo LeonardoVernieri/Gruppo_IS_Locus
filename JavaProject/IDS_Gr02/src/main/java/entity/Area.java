@@ -52,9 +52,8 @@ public class Area {
         this.tipologia = tipologia;
     }
 
-    public boolean creaArea(String str, Integer num){
+    public void creaArea(String str, Integer num){
         Area a = new Area(str, num);
         gp.salva(a);
-        return true;
     }
 }

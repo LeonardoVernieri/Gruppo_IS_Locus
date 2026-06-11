@@ -41,9 +41,6 @@ public class FormCreaSala extends JFrame{
 
     private FormBibliotecario parent;
 
-    //GestoreSalaStudio ges = new GestoreSalaStudio(); /*Dato che non è un metodo static non posso chiamarlo come ho
-    // fatto io. Domanda: dovrei impostarlo come static?*/
-
     public void salvaDati(){
         String nome = nomeSala.getText();
         String descrizione = this.descrizione.getText();
@@ -52,8 +49,6 @@ public class FormCreaSala extends JFrame{
         LocalTime orarioChiusura = LocalTime.parse((String)comboChiusura.getSelectedItem());
         boolean presenzaAree = ckbPresenza.isSelected();
 
-
-        //List<Object[]> aree = new ArrayList<>();
         List<String> col1 = new ArrayList<>();
         List<Integer> col2 = new ArrayList<>();
         if (presenzaAree) {
@@ -65,17 +60,20 @@ public class FormCreaSala extends JFrame{
             }
         }
 
-        boolean esito = GestoreSalaStudio.aggiungiSalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
-        boolean esito1 = GestoreSalaStudio.aggiungiArea(col1, col2);
-        if(esito && esito1){
-            btnSalva.setForeground(Color.GREEN);
-            JOptionPane.showMessageDialog(null, "Sala creata correttamente");
-            dispose();
-            parent.setVisible(true);
+        boolean esito1 = GestoreSalaStudio.aggiungiArea(col1, col2, numeroPostazioniTotali);
+        if(esito1){
+            boolean esito = GestoreSalaStudio.aggiungiSalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
+            if(esito){
+                btnSalva.setForeground(Color.GREEN);
+                JOptionPane.showMessageDialog(null, "Sala creata correttamente");
+            }
         }
         else{
             btnSalva.setForeground(Color.RED);
+            JOptionPane.showMessageDialog(null, "Sala non creata correttamente");
         }
+        dispose();
+        parent.setVisible(true);
     }
 
     public FormCreaSala(FormBibliotecario parent) {
