@@ -31,22 +31,22 @@ public class FormLogin extends JFrame {
 
         loginButton.addActionListener
                 (
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        eseguiLogin();
-                    }
-                }
+                        new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                eseguiLogin();
+                            }
+                        }
                 );
 
         registratiButton.addActionListener
                 (
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        apriRegistrazione();
-                    }
-                }
+                        new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                apriRegistrazione();
+                            }
+                        }
                 );
     }
 
@@ -60,27 +60,32 @@ public class FormLogin extends JFrame {
 
         String email = emailField.getText().trim();
         String password = new String(passwordField.getPassword());
-
-        try {
-            Object utente = gestoreAccesso.loginUtente(email, password);
-            messaggioLabel.setForeground(new Color(0, 128, 0));
-            if (utente instanceof Studente s)
+        Object utente = gestoreAccesso.loginUtente(email, password);
+        if (utente == null) {
+            if (gestoreAccesso.isBloccato())
             {
-                messaggioLabel.setText("Benvenuto " + s.getNome() + "!");
-                JOptionPane.showMessageDialog(this, "Login eseguito come Studente.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Account bloccato: troppi tentativi falliti.", "Errore", JOptionPane.ERROR_MESSAGE);
+                messaggioLabel.setText("Tentativi massimi raggiunti.");
+                loginButton.setEnabled(false);
             }
-            else if (utente instanceof Bibliotecario b) {
-                messaggioLabel.setText("Benvenuto " + b.getNome() + "!");
-                BibliotecarioStub stub = new BibliotecarioStub(b.getNome(), b.getCognome());
-                FormBibliotecario formBib = new FormBibliotecario();
-                formBib.setVisible(true);
-                this.dispose();
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Credenziali errate.", "Errore di Accesso", JOptionPane.WARNING_MESSAGE);
             }
-
+            return;
         }
-        catch (Exception ex) {
-            messaggioLabel.setForeground(Color.RED);
-            messaggioLabel.setText(ex.getMessage());
+
+        messaggioLabel.setForeground(new Color(0, 128, 0));
+
+        if (utente instanceof Studente s) {
+            messaggioLabel.setText("Benvenuto " + s.getNome() + "!");
+            JOptionPane.showMessageDialog(this, "Login eseguito come Studente.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if (utente instanceof Bibliotecario b) {
+            messaggioLabel.setText("Benvenuto " + b.getNome() + "!");
+            FormBibliotecario formBib = new FormBibliotecario();
+            formBib.setVisible(true);
+            this.dispose();
         }
     }
 
@@ -98,5 +103,3 @@ public class FormLogin extends JFrame {
         });
     }
 }
-
-

@@ -1,7 +1,7 @@
 package control;
 
-import database.GestoreBibliotecari;
-import database.GestoreStudenti;
+import entity.GestoreBibliotecari;
+import entity.GestoreStudenti;
 import entity.Bibliotecario;
 import entity.Studente;
 
@@ -10,36 +10,34 @@ public class GestoreAccesso {
     private static final int MAX_TENTATIVI = 3;
     private int contatore = 0;
 
-    public Object loginUtente(String email, String password)
-            throws Exception {
-        if (contatore >= MAX_TENTATIVI) {
-            throw new Exception(
-                    "Account bloccato: troppi tentativi falliti.");
-        }
+    public Object loginUtente(String email, String password) {
+
+        if (contatore >= MAX_TENTATIVI)
+            return null;
 
         GestoreStudenti gestoreStudenti = new GestoreStudenti();
-
         Studente studente = gestoreStudenti.cercaStudente(email);
 
         if (studente == null) {
             GestoreBibliotecari gestoreBibliotecari = new GestoreBibliotecari();
-
             Bibliotecario bibliotecario = gestoreBibliotecari.cercaBibliotecario(email);
 
             if (bibliotecario == null || !bibliotecario.getPassword().equals(password)) {
                 contatore++;
-                throw new Exception("Credenziali errate/Tentativi Massimi Raggiunti");
+                return null;
             }
             contatore = 0;
+            Sessione.getInstance().apriSessioneBibliotecario(bibliotecario);
             return bibliotecario;
         }
 
-        if (!studente.getPassword().equals(password))
-        {
+        if (!studente.getPassword().equals(password)) {
             contatore++;
-            throw new Exception("Credenziali errate/Tentativi Massimi Raggiunti");
+            return null;
         }
+
         contatore = 0;
+        Sessione.getInstance().apriSessioneStudente(studente);
         return studente;
     }
 

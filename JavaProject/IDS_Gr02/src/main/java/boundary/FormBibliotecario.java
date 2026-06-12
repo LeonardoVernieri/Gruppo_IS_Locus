@@ -1,5 +1,8 @@
 package boundary;
 
+import entity.Bibliotecario;
+import control.Sessione;
+
 import  javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +25,8 @@ public class FormBibliotecario extends JFrame{
         pack();
         
         setLocationRelativeTo(null);
+
+        Bibliotecario bibliotecarioLoggato = Sessione.getInstance().getBibliotecarioCorrente();
 
         btnCrea.addActionListener(new ActionListener() {
             @Override

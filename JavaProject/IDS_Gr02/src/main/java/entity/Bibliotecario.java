@@ -12,7 +12,6 @@ import java.util.List;
 public class Bibliotecario{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long codiceInterno;
 
     private String nome;

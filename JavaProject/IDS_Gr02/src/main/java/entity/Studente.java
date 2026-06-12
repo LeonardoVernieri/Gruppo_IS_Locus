@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 public class Studente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long matricola;
 
     private String nome;

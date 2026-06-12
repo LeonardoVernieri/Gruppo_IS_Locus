@@ -66,8 +66,7 @@ public class FormRegistrazione extends JFrame {
 
 
     private void aggiornaCampoAggiuntivo() {
-        String ruolo = (String) ruoloComboBox
-                .getSelectedItem();
+        String ruolo = (String) ruoloComboBox.getSelectedItem();
         if ("STUDENTE".equals(ruolo))
         {
             campoAggiuntivoLabel.setText("Matricola:");
@@ -89,22 +88,16 @@ public class FormRegistrazione extends JFrame {
             if ("STUDENTE".equals(ruolo))
             {
                 gestoreAccesso.registraStudente(extra, nome, cognome, email, password);
+                dispose();
             }
             else
             {
                 gestoreAccesso.registraBibliotecario(extra, nome, cognome, email, password);
+                dispose();
             }
 
             messaggioLabel.setForeground(new Color(0, 128, 0));
             messaggioLabel.setText("Registrazione completata!");
-
-            Timer timer = new Timer(2000, ev ->
-            {
-                if (parent != null) {
-                    parent.setVisible(true);
-                }
-                dispose();
-            });
 
         } catch (Exception ex) {
 

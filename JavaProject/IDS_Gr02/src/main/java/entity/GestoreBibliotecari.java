@@ -1,6 +1,7 @@
-package database;
+package entity;
 
-import entity.Bibliotecario;
+import database.GestorePersistenza;
+
 import java.util.Map;
 
 public class GestoreBibliotecari {
