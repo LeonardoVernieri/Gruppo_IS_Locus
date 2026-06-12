@@ -18,13 +18,11 @@ public class Sessione {
         return instance;
     }
 
-    // apertura sessione bibliotecario
     public void apriSessioneBibliotecario(Bibliotecario b) {
         this.bibliotecarioCorrente = b;
         this.studenteCorrente = null;
     }
 
-    // apertura sessione studente
     public void apriSessioneStudente(Studente s) {
         this.studenteCorrente = s;
         this.bibliotecarioCorrente = null;
