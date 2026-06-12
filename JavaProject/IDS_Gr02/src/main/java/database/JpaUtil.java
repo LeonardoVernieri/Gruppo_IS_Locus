@@ -37,11 +37,8 @@ public class JpaUtil {
          * Creiamo la EntityManagerFactory usando la persistence unit
          * definita nel file persistence.xml.
          *
-         * Il nome "boatyardPU" deve coincidere con:
-         *
-         * <persistence-unit name="boatyardPU">
          */
-        emf = Persistence.createEntityManagerFactory("boatyardPU");
+        emf = Persistence.createEntityManagerFactory("bibliotecaSys");
     }
 
     /*
