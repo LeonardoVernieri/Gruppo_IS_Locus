@@ -21,6 +21,7 @@ public class SalaStudio{
     @OneToMany(mappedBy = "sala")
     private List<Area> aree = new ArrayList<>();
 
+
     public SalaStudio(String nome, String descrizione, int numeroPostazioni,
                       LocalTime orarioApertura, LocalTime orarioChiusura, boolean presenzaAree) {
         this.nome = nome;
