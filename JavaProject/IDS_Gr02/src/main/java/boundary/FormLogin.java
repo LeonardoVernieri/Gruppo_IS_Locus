@@ -1,9 +1,9 @@
 package boundary;
 
 import control.GestoreAccesso;
+import control.Sessione;
 import entity.Bibliotecario;
 import entity.Studente;
-import stub.BibliotecarioStub;
 
 import javax.swing.*;
 import java.awt.*;
@@ -78,7 +78,9 @@ public class FormLogin extends JFrame {
         }
         else if (utente instanceof Bibliotecario b) {
             messaggioLabel.setText("Benvenuto " + b.getNome() + "!");
-            FormBibliotecario formBib = new FormBibliotecario();
+            Sessione session = Sessione.getInstance();
+            session.apriSessioneBibliotecario(b);
+            FormBibliotecario formBib = new FormBibliotecario(session);
             formBib.setVisible(true);
             dispose();
         }
