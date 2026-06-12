@@ -92,13 +92,13 @@ public class FormCreaSala extends JFrame{
         }
 
 
-        boolean esito1 = GestoreSalaStudio.aggiungiArea(col1, col2, numeroPostazioniTotali);
-        if(esito1 && sblocco){
-            boolean esito = GestoreSalaStudio.aggiungiSalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
-            if(esito){
+        boolean esito = GestoreSalaStudio.aggiungiSalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
+        if(esito && sblocco){
+            boolean esito1 = GestoreSalaStudio.aggiungiArea(col1, col2, numeroPostazioniTotali);
+            if(esito1){
                 btnSalva.setForeground(Color.GREEN);
-                JOptionPane.showMessageDialog(null, "Sala creata correttamente");
             }
+            JOptionPane.showMessageDialog(null, "Sala creata correttamente");
         }
         else{
             btnSalva.setForeground(Color.RED);

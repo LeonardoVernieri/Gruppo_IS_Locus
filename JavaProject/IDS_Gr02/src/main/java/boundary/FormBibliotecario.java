@@ -10,6 +10,8 @@ public class FormBibliotecario extends JFrame{
     private JButton btnCrea;
     private JButton btnModifica;
     private JButton btnElimina;
+    private JButton monitoraggioAndamentoSaleButton;
+    private JButton visualizzaStoricoPrenotazioniButton;
 
 
     public FormBibliotecario() {

@@ -1,6 +1,7 @@
-package database;
+package entity;
 
-import entity.Bibliotecario;
+import database.GestorePersistenza;
+
 import java.util.Map;
 
 public class GestoreBibliotecari {
@@ -13,7 +14,7 @@ public class GestoreBibliotecari {
         );
     }
 
-    public void creaBibliotecario(Long codiceInterno,
+    public boolean creaBibliotecario(Long codiceInterno,
                                   String nome, String cognome,
                                   String email, String password) {
 
@@ -21,5 +22,6 @@ public class GestoreBibliotecari {
 
         GestorePersistenza gp = new GestorePersistenza();
         gp.salva(bib);
+        return true;
     }
 }
