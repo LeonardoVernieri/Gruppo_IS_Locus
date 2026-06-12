@@ -34,6 +34,12 @@ public class Bibliotecario{
         this.email = email;
         this.password = password;
     }
+    public String getPassword() { return password; }
+    public void setPassword(String p) { this.password = p; }
+    public String getNome() { return nome; }
+    public void setNome(String p) { this.nome = p; }
+    public String getCognome() { return cognome; }
+    public void setCognome(String p) { this.cognome = p; }
     @Transient
     public static final GestorePersistenza gp = new GestorePersistenza();
 
