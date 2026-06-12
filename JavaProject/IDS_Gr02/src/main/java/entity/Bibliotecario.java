@@ -23,8 +23,16 @@ public class Bibliotecario{
     @OneToMany
     private List<SalaStudio> saleStudio = new ArrayList<>();
 
-    public Bibliotecario(){
+    public Bibliotecario() {}
 
+    public Bibliotecario(Long codiceInterno, String nome,
+                         String cognome, String email,
+                         String password) {
+        this.codiceInterno = codiceInterno;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.password = password;
     }
     @Transient
     public static final GestorePersistenza gp = new GestorePersistenza();
