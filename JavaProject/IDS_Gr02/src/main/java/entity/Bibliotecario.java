@@ -64,11 +64,4 @@ public class Bibliotecario{
         return false;
 
     }
-
-    public String getPassword() { return password; }
-    public void setPassword(String p) { this.password = p; }
-    public String getNome() { return nome; }
-    public void setNome(String p) { this.nome = p; }
-    public String getCognome() { return cognome; }
-    public void setCognome(String p) { this.cognome = p; }
 }

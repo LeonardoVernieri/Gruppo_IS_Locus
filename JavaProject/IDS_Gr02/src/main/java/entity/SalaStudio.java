@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 @Entity
 public class SalaStudio{
@@ -43,15 +42,48 @@ public class SalaStudio{
 
     public SalaStudio(){}
 
-    public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura) {
+    public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.numeroPostazioni = numeroPostazioni;
         this.orarioApertura = orarioApertura;
         this.orarioChiusura = orarioChiusura;
+        this.presenzaAree = presenzaAree;
+        this.aree = new ArrayList<>();
         init();
     }
 
+
+    // Setter
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public void setNumeroPostazioni(int numeroPostazioni) {
+        this.numeroPostazioni = numeroPostazioni;
+    }
+
+    public void setOrarioApertura(LocalTime orarioApertura) {
+        this.orarioApertura = orarioApertura;
+    }
+
+    public void setOrarioChiusura(LocalTime orarioChiusura) {
+        this.orarioChiusura = orarioChiusura;
+    }
+
+    public void setPresenzaAree(boolean presenzaAree) {
+        this.presenzaAree = presenzaAree;
+    }
+
+    public void setAree(List<Area> aree) {
+        this.aree = aree;
+    }
+
+    // Getter
     public String getNome() {
         return nome;
     }
@@ -60,6 +92,8 @@ public class SalaStudio{
         return numeroPostazioni;
     }
 
+
+    // Metodi
     public List<Postazione> getPostazioni(String area) {
         if(area == null || area.isBlank()){
             return gestorePersistenza.cercaPerCampi(Postazione.class, Map.of("salaStudio", this));
@@ -116,40 +150,8 @@ public class SalaStudio{
         return false;
     }
 
-    public SalaStudio() {
-
-    }
-
     public void aggiungiArea(String tipologia, int numeroPostazioni) {
         Area area = new Area(tipologia, numeroPostazioni, this);
         aree.add(area);
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
-    public void setNumeroPostazioni(int numeroPostazioni) {
-        this.numeroPostazioni = numeroPostazioni;
-    }
-
-    public void setOrarioApertura(LocalTime orarioApertura) {
-        this.orarioApertura = orarioApertura;
-    }
-
-    public void setOrarioChiusura(LocalTime orarioChiusura) {
-        this.orarioChiusura = orarioChiusura;
-    }
-
-    public void setPresenzaAree(boolean presenzaAree) {
-        this.presenzaAree = presenzaAree;
-    }
-
-    public void setAree(List<Area> aree) {
-        this.aree = aree;
     }
 }

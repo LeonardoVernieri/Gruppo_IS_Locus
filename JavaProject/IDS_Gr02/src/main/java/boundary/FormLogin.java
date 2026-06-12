@@ -22,6 +22,7 @@ public class FormLogin extends JFrame {
     private GestoreAccesso gestoreAccesso = new GestoreAccesso();
 
     public FormLogin() {
+
         setTitle("Login");
         setContentPane(contentPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,9 +76,14 @@ public class FormLogin extends JFrame {
         if (utente instanceof Studente s) {
             messaggioLabel.setText("Benvenuto " + s.getNome() + "!");
             JOptionPane.showMessageDialog(this, "Login eseguito come Studente.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
+            Sessione session = Sessione.getInstance();
+            session.apriSessioneStudente(s);
+            new FormStudente(session);
+            dispose();
         }
         else if (utente instanceof Bibliotecario b) {
             messaggioLabel.setText("Benvenuto " + b.getNome() + "!");
+            JOptionPane.showMessageDialog(this, "Login eseguito come Bibliotecario.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
             Sessione session = Sessione.getInstance();
             session.apriSessioneBibliotecario(b);
             FormBibliotecario formBib = new FormBibliotecario(session);
@@ -86,17 +92,11 @@ public class FormLogin extends JFrame {
         }
     }
 
+
     private void apriRegistrazione(){
         FormRegistrazione formReg = new FormRegistrazione(this);
         formReg.setVisible(true);
         dispose();
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FormLogin form = new FormLogin();
-            form.setVisible(true);
-        });
     }
 }
 

@@ -31,6 +31,12 @@ public class Studente {
         this.password = password;
     }
 
+    public String getPassword() { return password; }
+    public void setPassword(String p) { this.password = p; }
+    public String getNome() { return nome; }
+    public void setNome(String p) { this.nome = p; }
+
+
     public Prenotazione creaPrenotazione(Postazione postazione, LocalDate data, FasciaOraria fascia) {
         return new Prenotazione(data, this, postazione, fascia.getOraInizio(), fascia.getOraFine());
     }

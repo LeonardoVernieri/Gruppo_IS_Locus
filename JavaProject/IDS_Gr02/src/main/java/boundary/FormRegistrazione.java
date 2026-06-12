@@ -98,10 +98,4 @@ public class FormRegistrazione extends JFrame {
             }
         }
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FormRegistrazione form = new FormRegistrazione(null);
-            form.setVisible(true);
-        });
-    }
 }

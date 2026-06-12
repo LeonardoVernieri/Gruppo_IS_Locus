@@ -24,17 +24,10 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
     private Sessione session;
 
     // ═════════════════════════════════════════════════════════════════════════
-    public FormEffettuaPrenotazione() {
+    public FormEffettuaPrenotazione(Sessione session) {
+        super(session);
         // Il costruttore padre costruisce già tutta la UI base.
         // Qui personalizziamo titolo, dimensione e aggiungiamo la sezione area.
-
-        session = Sessione.getInstance();
-
-        // DA CAMBIARE
-        GestorePersistenza gestore = new GestorePersistenza();
-
-        session.apriSessioneStudente(gestore.cercaPrimoPerCampi(Studente.class, Map.of("nome", "Matteo")));
-
         setTitle("Effettua prenotazione");
         setSize(660, 640);
 
@@ -142,7 +135,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
 
 
 
-        new FormStudente();
+        new FormStudente(session);
         dispose();
     }
 
@@ -245,15 +238,5 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
 
             g2.dispose();
         }
-    }
-
-    // ═════════════════════════════════════════════════════════════════════════
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
-            catch (Exception ignored) {}
-            new FormEffettuaPrenotazione().setVisible(true);
-        });
     }
 }

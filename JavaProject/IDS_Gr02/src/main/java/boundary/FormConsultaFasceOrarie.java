@@ -1,5 +1,6 @@
 package boundary;
 
+import control.Sessione;
 import dto.FasciaOraria;
 import control.GestoreSaleStudio;
 
@@ -48,9 +49,13 @@ public class FormConsultaFasceOrarie extends JFrame {
     protected LocalDate dataSelezionata = null;
     protected String nomeSala = null;
 
+    private Sessione session;
+
     // ═════════════════════════════════════════════════════════════════════════
-    public FormConsultaFasceOrarie() {
+    public FormConsultaFasceOrarie(Sessione session) {
         gestore = new GestoreSaleStudio();
+
+        this.session = session;
 
         setTitle("Fasce orarie disponibili");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,7 +80,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         // root.add(Box.createVerticalStrut(8));
         RoundedButton btnTorna = new RoundedButton("← Torna al menu");
         btnTorna.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btnTorna.addActionListener(e -> { new FormStudente(); dispose(); });
+        btnTorna.addActionListener(e -> { new FormStudente(session); dispose(); });
         root.add(btnTorna);
         root.add(Box.createVerticalStrut(20));
 
@@ -454,15 +459,5 @@ public class FormConsultaFasceOrarie extends JFrame {
             g2.dispose();
             super.paintComponent(g);
         }
-    }
-
-    // ═════════════════════════════════════════════════════════════════════════
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
-            catch (Exception ignored) {}
-            new FormConsultaFasceOrarie().setVisible(true);
-        });
     }
 }
