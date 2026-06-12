@@ -1,5 +1,5 @@
 package boundary;
-import control.BibliotecarioStub;
+import stub.BibliotecarioStub;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
