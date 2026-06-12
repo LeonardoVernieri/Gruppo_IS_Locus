@@ -44,10 +44,12 @@ public class FormCreaSala extends JFrame{
     public void salvaDati(){
         String nome = nomeSala.getText();
         String descrizione = this.descrizione.getText();
-        int numeroPostazioniTotali = Integer.parseInt(numPostazioniTotali.getText());
+        int numeroPostazioniTotali = 0;
         LocalTime orarioApertura = LocalTime.parse((String) comboApertura.getSelectedItem());
         LocalTime orarioChiusura = LocalTime.parse((String)comboChiusura.getSelectedItem());
         boolean presenzaAree = ckbPresenza.isSelected();
+
+        boolean sblocco = true;
 
         List<String> col1 = new ArrayList<>();
         List<Integer> col2 = new ArrayList<>();
@@ -60,8 +62,38 @@ public class FormCreaSala extends JFrame{
             }
         }
 
+        try{
+            numeroPostazioniTotali = Integer.parseInt(numPostazioniTotali.getText());
+            if (numeroPostazioniTotali <= 0) {
+                throw new IllegalArgumentException("Il numero deve essere maggiore di zero");
+            }
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Il campo delle postazioni deve contenere un numero intero positivo");
+            sblocco = false;
+        }
+        catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            sblocco = false;
+        }
+
+        if(nome.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Il nome non può essere vuoto");
+            sblocco = false;
+        }
+        if(descrizione.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Inserire una descrizione");
+            sblocco = false;
+        }
+
+        if((Integer)spinnerPostazioni.getValue() < 0){
+            JOptionPane.showMessageDialog(null, "Il numero di postazioni per area non possono essere negativi");
+            sblocco = false;
+        }
+
+
         boolean esito1 = GestoreSalaStudio.aggiungiArea(col1, col2, numeroPostazioniTotali);
-        if(esito1){
+        if(esito1 && sblocco){
             boolean esito = GestoreSalaStudio.aggiungiSalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
             if(esito){
                 btnSalva.setForeground(Color.GREEN);
@@ -72,6 +104,7 @@ public class FormCreaSala extends JFrame{
             btnSalva.setForeground(Color.RED);
             JOptionPane.showMessageDialog(null, "Sala non creata correttamente");
         }
+
         dispose();
         parent.setVisible(true);
     }

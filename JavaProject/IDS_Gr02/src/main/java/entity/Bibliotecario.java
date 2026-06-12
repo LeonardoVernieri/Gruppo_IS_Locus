@@ -26,6 +26,7 @@ public class Bibliotecario{
     public Bibliotecario(){
 
     }
+    @Transient
     public static final GestorePersistenza gp = new GestorePersistenza();
 
     public boolean creaSalaStudio(String nome,
@@ -41,7 +42,7 @@ public class Bibliotecario{
             saleStudio.add(s);
             return true;
         }
-        JOptionPane.showMessageDialog(null, "L'orario di apertura non può essere successivo a quello di chiusura");
+        JOptionPane.showMessageDialog(null, "L'orario di apertura non può essere successivo o uguale a quello di chiusura");
         return false;
 
     }
