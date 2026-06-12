@@ -1,25 +1,27 @@
 package control;
 
-import entity.Bibliotecario;
 import dto.FasciaOraria;
 import entity.CatalogoSalaStudio;
 import entity.SalaStudio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class GestoreSaleStudio {
 
+    private CatalogoSalaStudio catalogoSala;
+
+    public GestoreSaleStudio() {
+        catalogoSala = new CatalogoSalaStudio();
+    }
+
     public Map<FasciaOraria, Integer> getFascieOrarieDisponibili(String nomeSala, LocalDate data) {
-        CatalogoSalaStudio catalogoSala = new CatalogoSalaStudio();
         return catalogoSala.getDisponibilitaFasciaOrariaSalaPerData(nomeSala, data);
     }
 
     public List<String> getNomiSale() {
-        CatalogoSalaStudio catalogoSala = new CatalogoSalaStudio();
 
         List<String> nomiSale = new ArrayList<>();
 
@@ -30,8 +32,19 @@ public class GestoreSaleStudio {
         return nomiSale;
     }
 
-    public int getNumPostazioni(FasciaOraria fascia, LocalDate date, String nomeSala) {
-        CatalogoSalaStudio catalogoSala = new CatalogoSalaStudio();
+    public int getNumPostazioniSala(String nomeSala){
+        return catalogoSala.getPostazioniTotali(nomeSala);
+    }
+
+    public int getNumPostazioniLibere(FasciaOraria fascia, LocalDate date, String nomeSala) {
         return catalogoSala.getPostazioniLibere(fascia, date, nomeSala);
+    }
+
+    public List<String> getAreeSala(String nomeSala){
+        List<String> areeSale = new ArrayList<>();
+
+        areeSale.add("Area1");
+        areeSale.add("Area2");
+        return areeSale;
     }
 }

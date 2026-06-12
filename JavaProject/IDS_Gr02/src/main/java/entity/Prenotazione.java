@@ -26,6 +26,10 @@ public class Prenotazione {
     private LocalTime fineTempo;
 
     @ManyToOne
+    @JoinColumn(name = "studente_id")
+    private Studente studente;
+
+    @ManyToOne
     @JoinColumn(name = "postazione_id")
     private Postazione postazione;
 
@@ -39,6 +43,16 @@ public class Prenotazione {
             case ANNULLATA ->  statoPrenotazione = new StatoPAnnullata();
             case CONFERMATA ->   statoPrenotazione = new StatoPConfermata();
         }
+    }
+
+    public Prenotazione(LocalDate data, Studente stud, Postazione postazione, LocalTime inizioTempo, LocalTime fineTempo) {
+        this.data = data;
+        this.studente = stud;
+        this.postazione = postazione;
+        dataCheckIn = null;
+        stato = StatoPrenotazioneEnum.ATTIVA;
+        this.inizioTempo = inizioTempo;
+        this.fineTempo = fineTempo;
     }
 
     // Costruttore

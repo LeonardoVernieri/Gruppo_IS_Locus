@@ -4,7 +4,6 @@ import database.GestorePersistenza;
 import dto.FasciaOraria;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,7 @@ public class CatalogoSalaStudio {
         gestorePersistenza = new GestorePersistenza();
     }
 
-    public SalaStudio getSaleStudioPerNome(String nome){
+    public SalaStudio getSalaPerNome(String nome){
         return gestorePersistenza.cercaPrimoPerCampi(SalaStudio.class, Map.of("nome", nome)) ;
     }
 
@@ -26,7 +25,7 @@ public class CatalogoSalaStudio {
 
         Map<FasciaOraria, Integer> fascieOrarie =  new HashMap<FasciaOraria, Integer>();
 
-        SalaStudio s = getSaleStudioPerNome(nomeSala);
+        SalaStudio s = getSalaPerNome(nomeSala);
 
         for ( FasciaOraria fascia : s.getFasceOrarie()){
             fascieOrarie.put(fascia, s.getPostiLiberi(fascia, date));
@@ -38,8 +37,13 @@ public class CatalogoSalaStudio {
         return gestorePersistenza.cercaPerCampi(SalaStudio.class, Map.of());
     }
 
-    public int getPostazioniLibere(FasciaOraria fascia, LocalDate date, String Sala){
-        SalaStudio s = getSaleStudioPerNome(Sala);
+    public int getPostazioniTotali(String sala){
+        return getSalaPerNome(sala).getNumeroPostazioni();
+    }
+
+
+    public int getPostazioniLibere(FasciaOraria fascia, LocalDate date, String sala){
+        SalaStudio s = getSalaPerNome(sala);
         return s.getPostiLiberi(fascia, date);
     }
 }

@@ -52,8 +52,16 @@ public class SalaStudio{
         return nome;
     }
 
-    public List<Postazione> getPostazioni() {
-        return gestorePersistenza.cercaPerCampo(Postazione.class, "salaStudio", this);
+    public int getNumeroPostazioni() {
+        return numeroPostazioni;
+    }
+
+    public List<Postazione> getPostazioni(String area) {
+        if(area == null || area.isBlank()){
+            return gestorePersistenza.cercaPerCampi(Postazione.class, Map.of("salaStudio", this));
+        } else {
+            return gestorePersistenza.cercaPerCampi(Postazione.class, Map.of("salaStudio", this, "area", area));
+        }
     }
 
     public List<FasciaOraria>  getFasceOrarie() {
@@ -70,11 +78,37 @@ public class SalaStudio{
     // Ritorna il numero di postiLiberi per una data e una fascia oraria
     public int getPostiLiberi(FasciaOraria f, LocalDate data) {
         int count = 0;
-        for (Postazione p : getPostazioni()) {
+        for (Postazione p : getPostazioni(null)) {
             if (p.isDisponibile(f, data)) {
                 count++;
             }
         }
         return count;
+    }
+
+    public Postazione cercaPrimaPostazioneLibera(FasciaOraria fascia, String area, LocalDate data) {
+
+        for(Postazione p : getPostazioni(area)){
+            if (p.isDisponibile(fascia, data)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public boolean isDisponibilePostazione(List<FasciaOraria> fascia, LocalDate data, String sala) {
+
+        for (Postazione p : getPostazioni(sala)) {
+            boolean postazioneDisponibile = true;
+            for(FasciaOraria f : fascia) {
+                if (!p.isDisponibile(f, data)) {
+                    postazioneDisponibile = false;
+                    break;
+                }
+            }
+            if (postazioneDisponibile) { return  true; }
+        }
+
+        return false;
     }
 }

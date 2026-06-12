@@ -42,11 +42,19 @@ public class FormStudente {
         frame.setVisible(true);
 
 
-        effettuaPrenotazioneButton.addActionListener(new ActionListener() {
+        fasceOrarieDisponibiliButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FormConsultaFasceOrarie frameConsultaFasceOrarie =  new FormConsultaFasceOrarie();
                 frameConsultaFasceOrarie.setVisible(true);
+                frame.dispose();
+            }
+        });
+        effettuaPrenotazioneButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FormEffettuaPrenotazione formEffettuaPrenotazione = new FormEffettuaPrenotazione();
+                formEffettuaPrenotazione.setVisible(true);
                 frame.dispose();
             }
         });
