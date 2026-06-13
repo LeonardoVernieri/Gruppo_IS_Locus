@@ -6,7 +6,6 @@ import entity.Bibliotecario;
 import entity.CatalogoSalaStudio;
 import entity.SalaStudio;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -29,9 +28,9 @@ public class GestoreSaleStudio {
      * @param data     la data per cui si vuole consultare la disponibilità
      * @return mappa da FasciaOraria al numero di postazioni libere in quella fascia
      */
-    public Map<FasciaOraria, Integer> getFascieOrarieDisponibili(String nomeSala, LocalDate data) {
+    public Map<FasciaOraria, Integer> getNumPostazioniDisponibili(String nomeSala, LocalDate data, String area) {
         // Recupera dal catalogo tutte le fasce orarie con il relativo numero di posti liberi
-        Map<FasciaOraria, Integer> mapFasceOrarie = catalogoSala.getDisponibilitaFasciaOrariaSalaPerData(nomeSala, data);
+        Map<FasciaOraria, Integer> mapFasceOrarie = catalogoSala.getDisponibilitaFasciaOrariaSalaPerData(nomeSala, data, area);
 
         // Se la data richiesta è oggi, filtra le fasce già iniziate
         if (data.equals(LocalDate.now())) {
@@ -91,6 +90,11 @@ public class GestoreSaleStudio {
             areeSale.add(a.getTipologia());
         }
         return areeSale;
+    }
+
+    public int getNumPostazioniArea(String nomeSala, String tipologiaArea) {
+        SalaStudio s =  catalogoSala.getSalaPerNome(nomeSala);
+        return s.getArea(tipologiaArea).getNumeroPostazioni();
     }
 
     /**

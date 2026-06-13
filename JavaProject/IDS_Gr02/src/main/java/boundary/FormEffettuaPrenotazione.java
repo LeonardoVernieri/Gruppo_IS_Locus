@@ -118,26 +118,32 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         } else {
             if (mostraDialogSeparazione()){
                 for (FasciaOraria fascia : fasceSelezionate) {
-                    gestorePrenotazioni.effettuaPrenotazione(nomeSala, dataSelezionata, fascia, session.getStudenteCorrente(), areaSel);
+                    gestorePrenotazioni.effettuaPrenotazione(nomeSala, dataSelezionata, fascia, Sessione.getInstance().getStudenteCorrente(), areaSel);
                 }
+                JOptionPane.showMessageDialog(this,
+                        fasceSelezionate.size() + " prenotazioni effettuate per la fasce orarie " + fasceSelezionate,
+                        "Conferma", JOptionPane.INFORMATION_MESSAGE);
+                new FormStudente(session);
+                dispose();
             }
-            JOptionPane.showMessageDialog(this,
-                     fasceSelezionate.size() + " prenotazioni effettuate per la fasce orarie " + fasceSelezionate,
-                    "Conferma", JOptionPane.INFORMATION_MESSAGE);
         }
-
-
-
-
-        new FormStudente(session);
-        dispose();
     }
 
 
-    // TODO
     private boolean mostraDialogSeparazione() {
-        // logica UI per chiedere all'utente
-        return true; // placeholder
+        Object[] opzioni = {"Sì, prenota separatamente", "No, annulla"};
+        int scelta = JOptionPane.showOptionDialog(
+                this,
+                "Le fasce selezionate non possono essere unite in un'unica prenotazione.\n" +
+                        "Vuoi effettuare prenotazioni separate per ogni fascia?",
+                "Conferma prenotazioni separate",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opzioni,
+                opzioni[0]
+        );
+        return scelta == 0; // 0 = primo bottone = "Sì"
     }
 
     // ── Sezione area ──────────────────────────────────────────────────────────

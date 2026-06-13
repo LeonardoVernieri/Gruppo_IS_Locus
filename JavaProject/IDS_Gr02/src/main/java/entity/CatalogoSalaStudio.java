@@ -21,14 +21,14 @@ public class CatalogoSalaStudio {
     }
 
 
-    public Map<FasciaOraria, Integer> getDisponibilitaFasciaOrariaSalaPerData(String nomeSala, LocalDate date){
+    public Map<FasciaOraria, Integer> getDisponibilitaFasciaOrariaSalaPerData(String nomeSala, LocalDate date, String area){
 
         Map<FasciaOraria, Integer> fascieOrarie =  new HashMap<FasciaOraria, Integer>();
 
         SalaStudio s = getSalaPerNome(nomeSala);
 
         for ( FasciaOraria fascia : s.getFasceOrarie()){
-            fascieOrarie.put(fascia, s.getPostiLiberi(fascia, date));
+            fascieOrarie.put(fascia, s.getPostiLiberi(fascia, date, area));
         }
         return fascieOrarie;
     }
@@ -44,6 +44,6 @@ public class CatalogoSalaStudio {
 
     public int getPostazioniLibere(FasciaOraria fascia, LocalDate date, String sala){
         SalaStudio s = getSalaPerNome(sala);
-        return s.getPostiLiberi(fascia, date);
+        return s.getPostiLiberi(fascia, date, null);
     }
 }

@@ -43,17 +43,6 @@ public class SalaStudio{
 
     public SalaStudio(){}
 
-//    public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree) {
-//        this.nome = nome;
-//        this.descrizione = descrizione;
-//        this.numeroPostazioni = numeroPostazioni;
-//        this.orarioApertura = orarioApertura;
-//        this.orarioChiusura = orarioChiusura;
-//        this.presenzaAree = presenzaAree;
-//        this.aree = new ArrayList<>();
-//        init();
-//    }
-
     public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree, List<String> col1, List<Integer> col2) {
         this.nome = nome;
         this.descrizione = descrizione;
@@ -83,7 +72,6 @@ public class SalaStudio{
             offset += count;
             }
         }
-
 
 
     // Setter
@@ -128,10 +116,14 @@ public class SalaStudio{
         return gestorePersistenza.cercaPerCampo(Area.class, "salaStudio", this);
     }
 
+    public Area getArea(String tipologiaArea) {
+        return gestorePersistenza.cercaPrimoPerCampi(Area.class, Map.of("tipologia", tipologiaArea, "salaStudio", this));
+    }
+
 
     // Metodi
-    public List<Postazione> getPostazioni(String area) {
-        if(area == null || area.isBlank()){
+    public List<Postazione> getPostazioni(Area area) {
+        if(area == null){
             return gestorePersistenza.cercaPerCampi(Postazione.class, Map.of("salaStudio", this));
         } else {
             return gestorePersistenza.cercaPerCampi(Postazione.class, Map.of("salaStudio", this, "area", area));
@@ -150,9 +142,17 @@ public class SalaStudio{
     }
 
     // Ritorna il numero di postiLiberi per una data e una fascia oraria
-    public int getPostiLiberi(FasciaOraria f, LocalDate data) {
+    public int getPostiLiberi(FasciaOraria f, LocalDate data, String tipologiaArea) {
         int count = 0;
-        for (Postazione p : getPostazioni(null)) {
+
+        Area area = (tipologiaArea != null)
+                ? getArea(tipologiaArea)
+                : null;
+
+        // DEBUG
+        System.out.println("FORZA IL NAPOLI" + area);
+
+        for (Postazione p : getPostazioni(area)) {
             if (p.isDisponibile(f, data)) {
                 count++;
             }
@@ -160,9 +160,13 @@ public class SalaStudio{
         return count;
     }
 
-    public Postazione cercaPrimaPostazioneLibera(FasciaOraria fascia, String area, LocalDate data) {
+    public Postazione cercaPrimaPostazioneLibera(FasciaOraria fascia, String tipologiaArea, LocalDate data) {
 
-        for(Postazione p : getPostazioni(area)){
+        Area area = (tipologiaArea != null)
+                ? getArea(tipologiaArea)
+                : null;
+
+        for(Postazione p : getPostazioni(area)) {
             if (p.isDisponibile(fascia, data)) {
                 return p;
             }
@@ -170,9 +174,9 @@ public class SalaStudio{
         return null;
     }
 
-    public boolean isDisponibilePostazione(List<FasciaOraria> fascia, LocalDate data, String sala) {
+    public boolean isDisponibilePostazione(List<FasciaOraria> fascia, LocalDate data) {
 
-        for (Postazione p : getPostazioni(sala)) {
+        for (Postazione p : getPostazioni(null)) {
             boolean postazioneDisponibile = true;
             for(FasciaOraria f : fascia) {
                 if (!p.isDisponibile(f, data)) {

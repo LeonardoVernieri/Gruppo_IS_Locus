@@ -178,6 +178,12 @@ public class FormConsultaFasceOrarie extends JFrame {
         comboArea.setAlignmentX(Component.LEFT_ALIGNMENT);
         comboArea.setFont(comboArea.getFont().deriveFont(13f));
         comboArea.setBackground(BG_CARD);
+
+        comboArea.addActionListener(e ->
+                {
+                    if (dataSelezionata != null) aggiornaFasce();
+                });
+
         areaSection.add(comboArea);
         areaSection.add(Box.createVerticalStrut(16));
 
@@ -258,10 +264,21 @@ public class FormConsultaFasceOrarie extends JFrame {
     protected void aggiornaFasce() {
         fascePanelInner.removeAll();
 
+
+        // Leggo l'area selezionata (null = nessuna preferenza)
+        String areaSelezionata = (comboArea != null && comboArea.getSelectedIndex() > 0)
+                ? (String) comboArea.getSelectedItem()
+                : null;
+
         Map<FasciaOraria, Integer> fasceDisponibili = new TreeMap<>(
                 Comparator.comparing(FasciaOraria::getOraInizio)
         );
-        fasceDisponibili.putAll(gestoreSaleStudio.getFascieOrarieDisponibili(nomeSala, dataSelezionata));
+        fasceDisponibili.putAll(gestoreSaleStudio.getNumPostazioniDisponibili(nomeSala, dataSelezionata, areaSelezionata));
+
+        // totale postazioni: dell'area se selezionata, altrimenti della sala
+        int totale = (areaSelezionata != null)
+                ? gestoreSaleStudio.getNumPostazioniArea(nomeSala, areaSelezionata)
+                : gestoreSaleStudio.getNumPostazioniSala(nomeSala);
 
         if (fasceDisponibili.isEmpty()) {
             JLabel vuoto = new JLabel("Nessuna fascia oraria disponibile per questa data.");
@@ -278,7 +295,6 @@ public class FormConsultaFasceOrarie extends JFrame {
             List<Map.Entry<FasciaOraria, Integer>> entries = new ArrayList<>(fasceDisponibili.entrySet());
             for (int i = 0; i < entries.size(); i++) {
                 Map.Entry<FasciaOraria, Integer> entry = entries.get(i);
-                int totale = gestoreSaleStudio.getNumPostazioniSala(nomeSala);
                 card.add(buildSlotRow(entry.getKey(), entry.getValue(), totale));
                 if (i < entries.size() - 1) card.add(buildInternalDivider());
             }

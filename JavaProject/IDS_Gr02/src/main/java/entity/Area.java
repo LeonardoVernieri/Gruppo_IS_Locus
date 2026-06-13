@@ -41,6 +41,7 @@ public class Area {
     public String getTipologia() { return tipologia; }
     public int getNumeroPostazioni() { return numeroPostazioni; }
     public SalaStudio getSala() { return salaStudio; }
+    public long getId() { return Id; }
 
     //setter
     public void setNumeroPostazioni(int numeroPostazioni) {

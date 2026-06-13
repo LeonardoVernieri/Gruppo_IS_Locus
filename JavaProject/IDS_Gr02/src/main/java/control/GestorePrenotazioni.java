@@ -25,7 +25,7 @@ public class GestorePrenotazioni {
         List<FasciaOraria> fasceListe = new ArrayList<>(fasce);
 
         if (fasceListe.size() > 1) {
-            return s.isDisponibilePostazione(fasceListe, data, sala);
+            return s.isDisponibilePostazione(fasceListe, data);
         }  else {
             return true;
         }
