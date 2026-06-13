@@ -88,4 +88,7 @@ public class GestoreSaleStudio {
         if (bibliotecario == null) return false; // sessione non valida*/
         return bibliotecario.creaSalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
     }
+
+    // Da togliere
+    public void prova(){}
 }
