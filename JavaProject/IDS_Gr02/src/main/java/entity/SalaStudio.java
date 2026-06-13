@@ -27,7 +27,8 @@ public class SalaStudio{
     private LocalTime orarioApertura;
     private LocalTime orarioChiusura;
     private boolean presenzaAree;
-    @OneToMany(mappedBy = "sala")
+
+    @OneToMany(mappedBy = "salaStudio")
     private List<Area> aree = new ArrayList<>();
 
     // Associazione con bibliotecari

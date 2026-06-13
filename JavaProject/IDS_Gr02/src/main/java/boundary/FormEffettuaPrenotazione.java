@@ -20,6 +20,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
 
     // ═════════════════════════════════════════════════════════════════════════
     public FormEffettuaPrenotazione(Sessione session) {
+
         super(session);
         // Il costruttore padre costruisce già tutta la UI base.
         // Qui personalizziamo titolo, dimensione e aggiungiamo la sezione area.
@@ -67,8 +68,8 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
     protected void onSalaSelezionata() {
         fasceSelezionate.clear();
         controlPanel.setVisible(false);
-        aggiornaComboAree();
         super.onSalaSelezionata();
+        aggiornaComboAree();
     }
 
     @Override
@@ -110,7 +111,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         if(esito) {
             List<FasciaOraria> fasceList = new ArrayList<>(fasceSelezionate);
             FasciaOraria fasciaUnita = new FasciaOraria(fasceList.getFirst().getOraInizio(), fasceList.getLast().getOraFine());
-            gestorePrenotazioni.effettuaPrenotazione(nomeSala, dataSelezionata, fasciaUnita, session.getStudenteCorrente(), areaSel);
+            gestorePrenotazioni.effettuaPrenotazione(nomeSala, dataSelezionata, fasciaUnita, Sessione.getInstance().getStudenteCorrente(), areaSel);
 
             JOptionPane.showMessageDialog(this,
                     "Prenotazione effettuata per la fascia oraria " + fasciaUnita,
@@ -179,7 +180,8 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         if (comboArea == null) return;
         comboArea.removeAllItems();
         comboArea.addItem("Nessuna preferenza");
-        List<String> aree = gestore.getAreeSala(nomeSala);
+        System.out.println(nomeSala);
+        List<String> aree = gestoreSaleStudio.getAreeSala(nomeSala);
         for (String area : aree) comboArea.addItem(area);
     }
 

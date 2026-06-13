@@ -34,7 +34,7 @@ public class FormConsultaFasceOrarie extends JFrame {
     protected static final double SOGLIA_QUASI_PIENO = 0.35;
 
     // ── Stato (protected per consentire l'override di buildSlotRow) ───────────
-    protected final GestoreSaleStudio gestore;
+    protected final GestoreSaleStudio gestoreSaleStudio;
     protected JComboBox<String> comboSale;
     protected JPanel datePanelInner;
     protected JScrollPane dateScrollPane;
@@ -53,7 +53,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
     // ═════════════════════════════════════════════════════════════════════════
     public FormConsultaFasceOrarie(Sessione session) {
-        gestore = new GestoreSaleStudio();
+        gestoreSaleStudio = new GestoreSaleStudio();
 
         this.session = session;
 
@@ -124,7 +124,7 @@ public class FormConsultaFasceOrarie extends JFrame {
     private JComboBox<String> buildCombo() {
         comboSale = new JComboBox<>();
         comboSale.addItem("Seleziona una sala...");
-        for (String nome : gestore.getNomiSale()) comboSale.addItem(nome);
+        for (String nome : gestoreSaleStudio.getNomiSale()) comboSale.addItem(nome);
         comboSale.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
         comboSale.setAlignmentX(Component.LEFT_ALIGNMENT);
         comboSale.setFont(comboSale.getFont().deriveFont(13f));
@@ -172,6 +172,11 @@ public class FormConsultaFasceOrarie extends JFrame {
     // ── Logica eventi ─────────────────────────────────────────────────────────
 
     protected void onSalaSelezionata() {
+//        System.out.println("index=" + comboSale.getSelectedIndex()
+//                + " item=" + comboSale.getSelectedItem()
+//                + " class=" + (comboSale.getSelectedItem() == null ? "null"
+//                : comboSale.getSelectedItem().getClass()));
+
         if (comboSale.getSelectedIndex() == 0) {
             dateScrollPane.setVisible(false);
             fasceScrollPane.setVisible(false);
@@ -188,6 +193,9 @@ public class FormConsultaFasceOrarie extends JFrame {
         fasceHeaderLabel.setVisible(false);
         dataSelezionata = null;
         revalidate(); repaint();
+
+//        nomeSala = (String) comboSale.getSelectedItem();
+//        System.out.println("nomeSala=" + nomeSala);
     }
 
     protected void buildDateButtons() {
@@ -222,7 +230,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         Map<FasciaOraria, Integer> fasceDisponibili = new TreeMap<>(
                 Comparator.comparing(FasciaOraria::getOraInizio)
         );
-        fasceDisponibili.putAll(gestore.getFascieOrarieDisponibili(nomeSala, dataSelezionata));
+        fasceDisponibili.putAll(gestoreSaleStudio.getFascieOrarieDisponibili(nomeSala, dataSelezionata));
 
         if (fasceDisponibili.isEmpty()) {
             JLabel vuoto = new JLabel("Nessuna fascia oraria disponibile per questa data.");
@@ -239,7 +247,7 @@ public class FormConsultaFasceOrarie extends JFrame {
             List<Map.Entry<FasciaOraria, Integer>> entries = new ArrayList<>(fasceDisponibili.entrySet());
             for (int i = 0; i < entries.size(); i++) {
                 Map.Entry<FasciaOraria, Integer> entry = entries.get(i);
-                int totale = gestore.getNumPostazioniSala(nomeSala);
+                int totale = gestoreSaleStudio.getNumPostazioniSala(nomeSala);
                 card.add(buildSlotRow(entry.getKey(), entry.getValue(), totale));
                 if (i < entries.size() - 1) card.add(buildInternalDivider());
             }
