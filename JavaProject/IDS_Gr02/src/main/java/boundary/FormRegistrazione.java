@@ -163,7 +163,7 @@ public class FormRegistrazione extends BaseForm {
         Long   extra    = Long.valueOf(campoAggiuntivoField.getText().trim());
 
         boolean esito;
-        if ("STUDENTE".equals(ruolo)) {
+        if ("Studente".equals(ruolo)) {
             esito = GestoreAccesso.registraStudente(extra, nome, cognome, email, password);
             if (esito) JOptionPane.showMessageDialog(null, "Registrazione studente completata");
             new FormLogin().setVisible(true);
