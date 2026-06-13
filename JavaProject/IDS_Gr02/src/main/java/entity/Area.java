@@ -3,8 +3,6 @@ package entity;
 import database.GestorePersistenza;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Area {
     @Id
@@ -13,18 +11,19 @@ public class Area {
 
     private String tipologia;
     private int numeroPostazioni;
+
     @ManyToOne
     @JoinColumn(name = "sala_id")
-    private SalaStudio sala; //riferimento alla sala che la contiene
+    private SalaStudio salaStudio; //riferimento alla sala che la contiene
 
     public void setSala(SalaStudio sala) {
-        this.sala = sala;
+        this.salaStudio = sala;
     }
 
     public Area(String tipologia, int numeroPostazioni, SalaStudio sala) {
         this.tipologia = tipologia;
         this.numeroPostazioni = numeroPostazioni;
-        this.sala = sala;
+        this.salaStudio = sala;
     }
 
     public Area(String tipologia, int numeroPostazioni) {
@@ -41,7 +40,7 @@ public class Area {
     //getter
     public String getTipologia() { return tipologia; }
     public int getNumeroPostazioni() { return numeroPostazioni; }
-    public SalaStudio getSala() { return sala; }
+    public SalaStudio getSala() { return salaStudio; }
 
     //setter
     public void setNumeroPostazioni(int numeroPostazioni) {

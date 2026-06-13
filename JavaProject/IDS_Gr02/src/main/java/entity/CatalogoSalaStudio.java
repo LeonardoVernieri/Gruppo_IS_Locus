@@ -17,7 +17,7 @@ public class CatalogoSalaStudio {
     }
 
     public SalaStudio getSalaPerNome(String nome){
-        return gestorePersistenza.cercaPrimoPerCampi(SalaStudio.class, Map.of("nome", nome)) ;
+        return gestorePersistenza.cercaPrimoPerCampi(SalaStudio.class, Map.of("nome", nome));
     }
 
 

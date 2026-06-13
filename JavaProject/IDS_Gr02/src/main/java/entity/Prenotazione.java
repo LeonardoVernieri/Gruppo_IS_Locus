@@ -34,6 +34,42 @@ public class Prenotazione {
     private Postazione postazione;
 
 
+    public Studente getStudente() {
+        return studente;
+    }
+
+    public void setStudente(Studente studente) {
+        this.studente = studente;
+    }
+    public void setStato(StatoPrenotazioneEnum stato) {
+        this.stato = stato;
+        this.statoPrenotazione = switch(stato) {
+            case ATTIVA -> new StatoPAttiva();
+            case SCADUTA -> new StatoPScaduta();
+            case ANNULLATA -> new StatoPAnnullata();
+            case CONFERMATA -> new StatoPConfermata();
+        };
+    }
+
+    public void setDataCheckIn(LocalDate dataCheckIn) {
+        this.dataCheckIn = dataCheckIn;
+    }
+
+    public void setInizioTempo(LocalTime inizioTempo) {
+        this.inizioTempo = inizioTempo;
+    }
+
+    public void setFineTempo(LocalTime fineTempo) {
+        this.fineTempo = fineTempo;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Data: " + dataCheckIn +
+                " | Orario: " + inizioTempo + " - " + fineTempo;
+    } //tostring per mostrare le informazioni della prenotazione per il metodo effettua checkin
+
     // Inizializza la classe stato corretta dell'oggetto prendendolo dallo salvato nel DB
     @PostLoad
     private void inizializzaStato(){
@@ -71,5 +107,14 @@ public class Prenotazione {
     // Restituisce True se la fascia e' contenuta
     public boolean isOverlap(FasciaOraria fascia) {
         return inizioTempo.isBefore(fascia.getFine()) && fineTempo.isAfter(fascia.getInizio());
+    }
+
+    public boolean isScaduta() {
+        return stato  == StatoPrenotazioneEnum.SCADUTA;
+    }
+
+    public void conferma() {
+        this.stato = StatoPrenotazioneEnum.CONFERMATA;
+        this.statoPrenotazione = new StatoPConfermata();
     }
 }
