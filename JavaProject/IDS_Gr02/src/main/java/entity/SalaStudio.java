@@ -55,6 +55,29 @@ public class SalaStudio{
         init();
     }
 
+    public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree, List<String> col1, List<Integer> col2) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.numeroPostazioni = numeroPostazioni;
+        this.orarioApertura = orarioApertura;
+        this.orarioChiusura = orarioChiusura;
+        this.presenzaAree = presenzaAree;
+        this.aree = new ArrayList<>();
+        init();
+
+        int s=0;
+        for(Integer n : col2){
+            s+=n;
+        }
+        for(int i=0;i<s;i++){
+            Postazione p = new Postazione(this);
+            this.creaPostazione(this);
+            postazioni.add(p);
+        }
+
+        this.creaArea(col1, col2, numeroPostazioni);
+    }
+
 
     // Setter
     public void setNome(String nome) {
@@ -162,10 +185,8 @@ public class SalaStudio{
     }
 
     public void creaPostazione(SalaStudio salaStudio){
-        for(int i=0;i<salaStudio.getNumeroPostazioni();i++){
-            Postazione p = new Postazione(salaStudio);
-            gestorePersistenza.salva(p);
-        }
+        Postazione p = new Postazione(salaStudio);
+        gestorePersistenza.salva(p);
     }
 
     public void creaArea(List<String> str, List<Integer> num, int numPostazioniTotali) {
