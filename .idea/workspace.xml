@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="31555ff9-70f1-4f2a-84f5-8f2ba637f888" name="Changes" comment="sistemato sistema bced per effettua checkin" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="37" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Nikkezzu&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LeonardoVernieri/Gruppo_IS_VernieriLeonardo.git&quot;,
+    &quot;accountId&quot;: &quot;a2f71719-2dba-4f51-8055-6b406c523882&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.035603185064878" />
+      <entry key="MS500" value="1.8125021909545573" />
+      <entry key="S2" value="3.572845040962563" />
+      <entry key="S5" value="5.424670511888643" />
+      <entry key="S10" value="7.893350045919703" />
+      <entry key="S30" value="13.733960007121706" />
+      <entry key="S60" value="17.18179782453952" />
+      <entry key="M2" value="19.810450075446496" />
+      <entry key="M5" value="23.493852911125376" />
+      <entry key="M10" value="32.70072975871233" />
+      <entry key="M15" value="45.359240582059556" />
+      <entry key="M30" value="84.55504481001513" />
+      <entry key="H1" value="142.22787488630982" />
+      <entry key="H2" value="199.88554044827868" />
+      <entry key="H4" value="242.52329105638898" />
+      <entry key="D1" value="288.42632176676955" />
+      <entry key="W1" value="297.45798215144" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.4155010550122045E-93" />
+      <entry key="S2" value="6.133770879615065E-24" />
+      <entry key="S5" value="5.189087807963202E-10" />
+      <entry key="S10" value="2.277956937249516E-5" />
+      <entry key="S30" value="0.028347526797181697" />
+      <entry key="S60" value="0.16840222060460536" />
+      <entry key="M2" value="0.42362987527652496" />
+      <entry key="M5" value="1.3966556298255182" />
+      <entry key="M10" value="4.3178694169771665" />
+      <entry key="M15" value="7.232321997165016" />
+      <entry key="M30" value="12.988022977796616" />
+      <entry key="H1" value="17.86224215599488" />
+      <entry key="H2" value="21.085092225109225" />
+      <entry key="H4" value="22.94643828749493" />
+      <entry key="D1" value="24.64347971485869" />
+      <entry key="W1" value="24.948706696960944" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9865549599621155" />
+      <entry key="MS500" value="1.7951609074162127" />
+      <entry key="S2" value="3.564535151554404" />
+      <entry key="S5" value="5.419660416441445" />
+      <entry key="S10" value="7.889710612252833" />
+      <entry key="S30" value="13.75966876058783" />
+      <entry key="S60" value="17.34727856252048" />
+      <entry key="M2" value="20.230937509409436" />
+      <entry key="M5" value="24.883269938131512" />
+      <entry key="M10" value="37.00168714752917" />
+      <entry key="M15" value="52.57024399559135" />
+      <entry key="M30" value="97.52161134071575" />
+      <entry key="H1" value="160.0744702515092" />
+      <entry key="H2" value="220.96109870187357" />
+      <entry key="H4" value="265.4644520630804" />
+      <entry key="D1" value="313.06884254142295" />
+      <entry key="W1" value="322.40654978912727" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3F1wacwUjXur0XvJCtGDdqdjCXr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainCreaTabelle.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;EffettuaCheck-In&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="31555ff9-70f1-4f2a-84f5-8f2ba637f888" name="Changes" comment="" />
+      <created>1781255947264</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781255947264</updated>
+      <workItem from="1781255948402" duration="184000" />
+      <workItem from="1781256146731" duration="24000" />
+      <workItem from="1781256183584" duration="300000" />
+      <workItem from="1781256615858" duration="81000" />
+      <workItem from="1781256752697" duration="27000" />
+      <workItem from="1781256793783" duration="664000" />
+      <workItem from="1781257478773" duration="62000" />
+      <workItem from="1781257555303" duration="4218000" />
+      <workItem from="1781261801295" duration="698000" />
+      <workItem from="1781278879760" duration="1498000" />
+      <workItem from="1781280395141" duration="2903000" />
+      <workItem from="1781334560207" duration="5115000" />
+    </task>
+    <task id="LOCAL-00001" summary="implementato la funzione effettua check-in in modo tale che guardi solo le prenotazioni del giorno stesso e tramite quelle lo studente sceglie prima la prenotazione e poi  clicca sulla funzione effettua check in">
+      <option name="closed" value="true" />
+      <created>1781282102660</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1781282102660</updated>
+    </task>
+    <task id="LOCAL-00002" summary="sistemato sistema bced per effettua checkin">
+      <option name="closed" value="true" />
+      <created>1781339046625</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1781339046625</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="implementato la funzione effettua check-in in modo tale che guardi solo le prenotazioni del giorno stesso e tramite quelle lo studente sceglie prima la prenotazione e poi  clicca sulla funzione effettua check in" />
+    <MESSAGE value="sistemato sistema bced per effettua checkin" />
+    <option name="LAST_COMMIT_MESSAGE" value="sistemato sistema bced per effettua checkin" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
