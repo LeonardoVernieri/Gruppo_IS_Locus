@@ -57,11 +57,11 @@ public class Bibliotecario{
                                      List<Integer> col2){
 
         if(orarioApertura.isBefore(orarioChiusura)){
-            SalaStudio s = new SalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree);
+            SalaStudio s = new SalaStudio(nome, descrizione, numeroPostazioniTotali, orarioApertura, orarioChiusura, presenzaAree, col1, col2);
             gp.salva(s);
-            s.creaArea(col1, col2, numeroPostazioniTotali);
-            s.creaPostazione(s);
-            saleStudio.add(s);
+//            s.creaArea(col1, col2, numeroPostazioniTotali);
+//            s.creaPostazione(s);
+//            saleStudio.add(s);
             return true;
         }
         JOptionPane.showMessageDialog(null, "L'orario di apertura non può essere successivo o uguale a quello di chiusura");

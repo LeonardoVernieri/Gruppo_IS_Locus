@@ -29,6 +29,11 @@ public class Postazione {
     @JoinColumn(name = "salaStudio_id")
     private SalaStudio salaStudio;
 
+    // Associazione con area
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    private Area area;
+
     public Postazione(){
         gestorePersistenza = new GestorePersistenza();
     }
@@ -36,6 +41,12 @@ public class Postazione {
     public Postazione(SalaStudio salaStudio){
         this.salaStudio = salaStudio;
     }
+
+    // Getter
+    public Area getArea() { return area; }
+
+    // Setter
+    public void setArea(Area area) { this.area = area; }
 
     public List<Prenotazione> getPrenotazioni() {
         return(gestorePersistenza.cercaPerCampo(Prenotazione.class, "postazione", this));

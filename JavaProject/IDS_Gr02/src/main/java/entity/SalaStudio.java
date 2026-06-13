@@ -1,11 +1,9 @@
 package entity;
 
-import control.GestoreSaleStudio;
 import database.GestorePersistenza;
 import dto.FasciaOraria;
 import jakarta.persistence.*;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -28,14 +26,14 @@ public class SalaStudio{
     private LocalTime orarioChiusura;
     private boolean presenzaAree;
 
-    @OneToMany(mappedBy = "salaStudio")
+    @OneToMany(mappedBy = "salaStudio", cascade = CascadeType.ALL)
     private List<Area> aree = new ArrayList<>();
 
     // Associazione con bibliotecari
     @ManyToMany
     private Set<Bibliotecario> bibliotecari = new HashSet<>(); // Set evita duplicati
 
-    @OneToMany(mappedBy = "salaStudio")
+    @OneToMany(mappedBy = "salaStudio", cascade = CascadeType.ALL)
     private List<Postazione> postazioni = new ArrayList<>();
 
     @PostLoad
@@ -45,16 +43,16 @@ public class SalaStudio{
 
     public SalaStudio(){}
 
-    public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree) {
-        this.nome = nome;
-        this.descrizione = descrizione;
-        this.numeroPostazioni = numeroPostazioni;
-        this.orarioApertura = orarioApertura;
-        this.orarioChiusura = orarioChiusura;
-        this.presenzaAree = presenzaAree;
-        this.aree = new ArrayList<>();
-        init();
-    }
+//    public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree) {
+//        this.nome = nome;
+//        this.descrizione = descrizione;
+//        this.numeroPostazioni = numeroPostazioni;
+//        this.orarioApertura = orarioApertura;
+//        this.orarioChiusura = orarioChiusura;
+//        this.presenzaAree = presenzaAree;
+//        this.aree = new ArrayList<>();
+//        init();
+//    }
 
     public SalaStudio(String nome, String descrizione, int numeroPostazioni, LocalTime orarioApertura, LocalTime orarioChiusura,  boolean presenzaAree, List<String> col1, List<Integer> col2) {
         this.nome = nome;
@@ -66,18 +64,26 @@ public class SalaStudio{
         this.aree = new ArrayList<>();
         init();
 
-        int s=0;
-        for(Integer n : col2){
-            s+=n;
-        }
-        for(int i=0;i<s;i++){
+        // Creo postazioni
+        for( int i=0 ; i<numeroPostazioni; i++){
             Postazione p = new Postazione(this);
-            this.creaPostazione(this);
-            postazioni.add(p);
+            this.postazioni.add(p);
         }
 
-        this.creaArea(col1, col2, numeroPostazioni);
-    }
+        // Crea aree
+        int offset = 0;
+        for (int i = 0; i < col1.size(); i++) {
+            int count = col2.get(i);
+            Area area = new Area(col1.get(i), count, this);
+            this.aree.add(area);
+
+            // Prendo una subList delle postazioni che non stato assegnate
+            this.postazioni.subList(offset, offset + count)
+                    .forEach(p -> p.setArea(area));
+            offset += count;
+            }
+        }
+
 
 
     // Setter
@@ -185,15 +191,4 @@ public class SalaStudio{
         aree.add(area);
     }
 
-    public void creaPostazione(SalaStudio salaStudio){
-        Postazione p = new Postazione(salaStudio);
-        gestorePersistenza.salva(p);
-    }
-
-    public void creaArea(List<String> str, List<Integer> num, int numPostazioniTotali) {
-        for (int i = 0; i < str.size(); i++) {
-            Area area = new Area(str.get(i), num.get(i));
-            gestorePersistenza.salva(area);
-        }
-    }
 }

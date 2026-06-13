@@ -14,7 +14,8 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
     // ── Stato aggiuntivo ──────────────────────────────────────────────────────
     private final Set<FasciaOraria> fasceSelezionate = new LinkedHashSet<>();
     private JPanel controlPanel;
-    private JComboBox<String> comboArea;
+    private JPanel prenotaSection;
+    private RoundedButton btnPrenota;
 
     private Sessione session;
 
@@ -27,13 +28,12 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         setTitle("Effettua prenotazione");
         setSize(660, 640);
 
-        // Aggiorna il titolo visivo (il JLabel è già nel root, lo sostituiamo)
-        // È più semplice aggiungere la sezione area in fondo al root esistente.
-        controlPanel = buildAreaSection();
-        panelConsultaFasceOrarie.add(controlPanel);
-
         // Aggiorna l'header fasce per indicare la selezione multipla
         fasceHeaderLabel.setText("FASCE ORARIE — SELEZIONA UNA O PIÙ");
+
+        // Aggiungo il bottone Prenota
+        panelConsultaFasceOrarie.add(Box.createVerticalStrut(10));
+        panelConsultaFasceOrarie.add(buildPrenotaButton());
 
         labelTitolo.setText("Effettua prenotazione");
 
@@ -67,7 +67,6 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
     @Override
     protected void onSalaSelezionata() {
         fasceSelezionate.clear();
-        controlPanel.setVisible(false);
         super.onSalaSelezionata();
         aggiornaComboAree();
     }
@@ -75,7 +74,6 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
     @Override
     protected void buildDateButtons() {
         fasceSelezionate.clear();
-        controlPanel.setVisible(false);
         super.buildDateButtons();
     }
 
@@ -87,7 +85,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
             fasceSelezionate.add(fascia);
             slotBtn.setSelected(true);
         }
-        controlPanel.setVisible(!fasceSelezionate.isEmpty());
+        prenotaSection.setVisible(!fasceSelezionate.isEmpty());
         revalidate();
         repaint();
     }
@@ -144,36 +142,30 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
 
     // ── Sezione area ──────────────────────────────────────────────────────────
 
-    private JPanel buildAreaSection() {
-        JPanel section = new JPanel();
-        section.setLayout(new BoxLayout(section, BoxLayout.Y_AXIS));
-        section.setOpaque(false);
-        section.setAlignmentX(Component.LEFT_ALIGNMENT);
-        section.setVisible(false);
+    private JPanel buildPrenotaButton() {
 
-        section.add(Box.createVerticalStrut(16));
-        section.add(buildDivider());
-        section.add(Box.createVerticalStrut(16));
+        prenotaSection = new JPanel();
+        prenotaSection.setLayout(new BoxLayout(prenotaSection, BoxLayout.Y_AXIS));
+        prenotaSection.setOpaque(false);
+        prenotaSection.setAlignmentX(Component.LEFT_ALIGNMENT);
+        prenotaSection.setVisible(false);
 
-        section.add(buildSectionLabel("Area (opzionale)"));
-        section.add(Box.createVerticalStrut(8));
+        JPanel row = new JPanel();
+        row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
+        row.setOpaque(false);
+        row.setAlignmentX(Component.LEFT_ALIGNMENT);
+        row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
 
-        comboArea = new JComboBox<>();
-        comboArea.addItem("Nessuna preferenza");
-        comboArea.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-        comboArea.setAlignmentX(Component.LEFT_ALIGNMENT);
-        comboArea.setFont(comboArea.getFont().deriveFont(13f));
-        comboArea.setBackground(BG_CARD);
-        section.add(comboArea);
-        section.add(Box.createVerticalStrut(16));
-
-        RoundedButton btnPrenota = new RoundedButton("Prenota");
-        btnPrenota.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnPrenota = new RoundedButton("Prenota");
         btnPrenota.setFont(btnPrenota.getFont().deriveFont(Font.BOLD, 13f));
+        btnPrenota.setMaximumSize(btnPrenota.getPreferredSize());
         btnPrenota.addActionListener(e -> onPrenota());
-        section.add(btnPrenota);
 
-        return section;
+        row.add(Box.createHorizontalGlue());
+        row.add(btnPrenota);
+
+        prenotaSection.add(row);
+        return prenotaSection;
     }
 
     private void aggiornaComboAree() {

@@ -44,6 +44,8 @@ public class FormConsultaFasceOrarie extends JFrame {
     protected JLabel hintLabel;
     protected JPanel panelConsultaFasceOrarie;
     protected JLabel labelTitolo;
+    protected JComboBox comboArea;
+    protected JPanel areaSection;
 
     protected final List<DateButton> dateButtons = new ArrayList<>();
     protected LocalDate dataSelezionata = null;
@@ -59,7 +61,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
         setTitle("Fasce orarie disponibili");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(660, 560);
+        setSize(660, 700);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -88,7 +90,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         // Sala
         panelConsultaFasceOrarie.add(buildSectionLabel("Sala"));
         panelConsultaFasceOrarie.add(Box.createVerticalStrut(8));
-        panelConsultaFasceOrarie.add(buildCombo());
+        panelConsultaFasceOrarie.add(buildComboSala());
         panelConsultaFasceOrarie.add(Box.createVerticalStrut(20));
 
         // Data
@@ -100,6 +102,11 @@ public class FormConsultaFasceOrarie extends JFrame {
         // Separatore
         panelConsultaFasceOrarie.add(buildDivider());
         panelConsultaFasceOrarie.add(Box.createVerticalStrut(20));
+
+        // Aree
+        panelConsultaFasceOrarie.add(buildAreaSection());
+        panelConsultaFasceOrarie.add(Box.createVerticalStrut(5));
+
 
         // Fasce orarie
         fasceHeaderLabel = buildSectionLabel("Fasce orarie");
@@ -121,7 +128,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
     // ── Builder sezioni ───────────────────────────────────────────────────────
 
-    private JComboBox<String> buildCombo() {
+    private JComboBox<String> buildComboSala() {
         comboSale = new JComboBox<>();
         comboSale.addItem("Seleziona una sala...");
         for (String nome : gestoreSaleStudio.getNomiSale()) comboSale.addItem(nome);
@@ -151,6 +158,32 @@ public class FormConsultaFasceOrarie extends JFrame {
         return dateScrollPane;
     }
 
+    private JPanel buildAreaSection(){
+
+        // Costruisco sezione per la scelta dell'area
+        areaSection = new JPanel();
+        areaSection.setLayout(new BoxLayout(areaSection, BoxLayout.Y_AXIS));
+        areaSection.setOpaque(false);
+        areaSection.setAlignmentX(Component.LEFT_ALIGNMENT);
+        areaSection.setVisible(false);
+
+        // Label per il titolo dell'area
+        areaSection.add(buildSectionLabel("Area (opzionale)"));
+        areaSection.add(Box.createVerticalStrut(8));
+
+        // Creo il JComboBox
+        comboArea = new JComboBox<>();
+        comboArea.addItem("Nesssuna preferenza");
+        comboArea.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
+        comboArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+        comboArea.setFont(comboArea.getFont().deriveFont(13f));
+        comboArea.setBackground(BG_CARD);
+        areaSection.add(comboArea);
+        areaSection.add(Box.createVerticalStrut(16));
+
+        return areaSection;
+    }
+
     private JScrollPane buildFasceScrollPane() {
         fascePanelInner = new JPanel();
         fascePanelInner.setLayout(new BoxLayout(fascePanelInner, BoxLayout.Y_AXIS));
@@ -172,15 +205,12 @@ public class FormConsultaFasceOrarie extends JFrame {
     // ── Logica eventi ─────────────────────────────────────────────────────────
 
     protected void onSalaSelezionata() {
-//        System.out.println("index=" + comboSale.getSelectedIndex()
-//                + " item=" + comboSale.getSelectedItem()
-//                + " class=" + (comboSale.getSelectedItem() == null ? "null"
-//                : comboSale.getSelectedItem().getClass()));
 
         if (comboSale.getSelectedIndex() == 0) {
             dateScrollPane.setVisible(false);
             fasceScrollPane.setVisible(false);
             fasceHeaderLabel.setVisible(false);
+            areaSection.setVisible(false);
             hintLabel.setVisible(true);
             revalidate(); repaint();
             return;
@@ -189,13 +219,14 @@ public class FormConsultaFasceOrarie extends JFrame {
         hintLabel.setVisible(false);
         buildDateButtons();
         dateScrollPane.setVisible(true);
+        areaSection.setVisible(true);
         fasceScrollPane.setVisible(false);
         fasceHeaderLabel.setVisible(false);
         dataSelezionata = null;
         revalidate(); repaint();
 
-//        nomeSala = (String) comboSale.getSelectedItem();
-//        System.out.println("nomeSala=" + nomeSala);
+        aggiornaComboAree();
+
     }
 
     protected void buildDateButtons() {
@@ -265,6 +296,16 @@ public class FormConsultaFasceOrarie extends JFrame {
         fascePanelInner.repaint();
         revalidate();
         repaint();
+    }
+
+    private void aggiornaComboAree() {
+        if (comboArea == null) return;
+        comboArea.removeAllItems();
+        comboArea.addItem("Nessuna preferenza");
+        System.out.println(nomeSala);
+        List<String> aree = gestoreSaleStudio.getAreeSala(nomeSala);
+        System.out.println(aree);
+        for (String area : aree) comboArea.addItem(area);
     }
 
     // ── Componenti UI ─────────────────────────────────────────────────────────
@@ -467,5 +508,11 @@ public class FormConsultaFasceOrarie extends JFrame {
             g2.dispose();
             super.paintComponent(g);
         }
+    }
+
+    static void main() {
+        FormConsultaFasceOrarie formConsultaFasceOrarie = new FormConsultaFasceOrarie(null);
+        formConsultaFasceOrarie.setVisible(true);
+        formConsultaFasceOrarie.pack();
     }
 }

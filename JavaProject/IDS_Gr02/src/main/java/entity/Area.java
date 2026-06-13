@@ -3,6 +3,9 @@ package entity;
 import database.GestorePersistenza;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Area {
     @Id
@@ -16,6 +19,8 @@ public class Area {
     @JoinColumn(name = "sala_id")
     private SalaStudio salaStudio; //riferimento alla sala che la contiene
 
+    @OneToMany(mappedBy = "area")
+    private List<Postazione> postazione = new ArrayList<>();
     public void setSala(SalaStudio sala) {
         this.salaStudio = sala;
     }
@@ -24,11 +29,6 @@ public class Area {
         this.tipologia = tipologia;
         this.numeroPostazioni = numeroPostazioni;
         this.salaStudio = sala;
-    }
-
-    public Area(String tipologia, int numeroPostazioni) {
-        this.tipologia = tipologia;
-        this.numeroPostazioni = numeroPostazioni;
     }
 
     public Area() {
@@ -51,8 +51,4 @@ public class Area {
         this.tipologia = tipologia;
     }
 
-    public void creaArea(String str, Integer num){
-        Area a = new Area(str, num);
-        gp.salva(a);
-    }
 }
