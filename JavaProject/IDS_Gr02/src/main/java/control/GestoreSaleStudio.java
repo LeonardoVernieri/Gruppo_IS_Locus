@@ -47,7 +47,10 @@ public class GestoreSaleStudio {
     public List<String> getAreeSala(String nomeSala){
         List<String> areeSale = new ArrayList<>();
 
-        // TODO
+        SalaStudio s = catalogoSala.getSalaPerNome(nomeSala);
+        for (Area a : s.getAree()) {
+            areeSale.add(a.getTipologia());
+        }
 
         return areeSale;
     }

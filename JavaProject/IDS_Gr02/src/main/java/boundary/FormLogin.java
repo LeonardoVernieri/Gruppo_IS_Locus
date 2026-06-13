@@ -18,17 +18,20 @@ public class FormLogin extends JFrame {
     private JButton loginButton;
     private JButton registratiButton;
     private JLabel messaggioLabel;
+    private JFrame frame;
 
     private GestoreAccesso gestoreAccesso = new GestoreAccesso();
 
     public FormLogin() {
+        frame = new JFrame();
 
-        setTitle("Login");
-        setContentPane(contentPane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        pack();
-        setLocationRelativeTo(null);
+        frame.setTitle("Login");
+        frame.setContentPane(contentPane);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
         loginButton.addActionListener(
                         new ActionListener() {
@@ -75,21 +78,21 @@ public class FormLogin extends JFrame {
 
         if (utente instanceof Studente s) {
             messaggioLabel.setText("Benvenuto " + s.getNome() + "!");
-            JOptionPane.showMessageDialog(this, "Login eseguito come Studente.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
+            // JOptionPane.showMessageDialog(this, "Login eseguito come Studente.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
             Sessione session = Sessione.getInstance();
             session.apriSessioneStudente(s);
             FormStudente formStudente = new FormStudente(session);
             formStudente.setVisible(true);
-            dispose();
-        }
-        else if (utente instanceof Bibliotecario b) {
+            frame.dispose();
+
+        }  else if (utente instanceof Bibliotecario b) {
             messaggioLabel.setText("Benvenuto " + b.getNome() + "!");
             JOptionPane.showMessageDialog(this, "Login eseguito come Bibliotecario.", "Accesso eseguito", JOptionPane.INFORMATION_MESSAGE);
             Sessione session = Sessione.getInstance();
             session.apriSessioneBibliotecario(b);
             FormBibliotecario formBib = new FormBibliotecario(session);
             formBib.setVisible(true);
-            dispose();
+            frame.dispose();
         }
     }
 

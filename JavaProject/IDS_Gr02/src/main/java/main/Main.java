@@ -19,16 +19,7 @@ public class Main extends JFrame {
 
         System.out.println("Avvio di Hibernate completato.");
 
-        JFrame frame = new JFrame();
-
-        frame.setTitle("Login");
-        frame.setContentPane(new FormLogin().getContentPane());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        new FormLogin();
     }
 
 
