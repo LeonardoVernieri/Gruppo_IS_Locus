@@ -1,4 +1,4 @@
-package stub;
+package control;
 
 public class BibliotecarioStub {
     private String nome;

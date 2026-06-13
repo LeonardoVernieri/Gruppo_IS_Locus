@@ -3,7 +3,6 @@ package boundary;
 import control.GestoreAccesso;
 import entity.Bibliotecario;
 import entity.Studente;
-import stub.BibliotecarioStub;
 
 import javax.swing.*;
 import java.awt.*;

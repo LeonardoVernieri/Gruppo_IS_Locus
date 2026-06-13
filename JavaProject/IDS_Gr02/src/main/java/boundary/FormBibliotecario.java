@@ -27,6 +27,7 @@ public class FormBibliotecario extends JFrame{
         setLocationRelativeTo(null);
 
         Bibliotecario bibliotecarioLoggato = Sessione.getInstance().getBibliotecarioCorrente();
+        titoloBibliotecario.setText("Ciao, " + bibliotecarioLoggato.getNome() + "!");
 
         btnCrea.addActionListener(new ActionListener() {
             @Override
