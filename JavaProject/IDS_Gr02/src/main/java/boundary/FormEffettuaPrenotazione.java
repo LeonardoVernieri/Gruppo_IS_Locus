@@ -106,14 +106,20 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
 
         boolean esito = gestorePrenotazioni.isPrenotazioneUnicaPossibile(nomeSala, fasceSelezionate, dataSelezionata, areaSel);
 
-        if(esito) {
+        if (esito) {
             List<FasciaOraria> fasceList = new ArrayList<>(fasceSelezionate);
             FasciaOraria fasciaUnita = new FasciaOraria(fasceList.getFirst().getOraInizio(), fasceList.getLast().getOraFine());
-            gestorePrenotazioni.effettuaPrenotazione(nomeSala, dataSelezionata, fasciaUnita, Sessione.getInstance().getStudenteCorrente(), areaSel);
-
-            JOptionPane.showMessageDialog(this,
-                    "Prenotazione effettuata per la fascia oraria " + fasciaUnita,
-                    "Conferma", JOptionPane.INFORMATION_MESSAGE);
+            if (gestorePrenotazioni.effettuaPrenotazione(nomeSala, dataSelezionata, fasciaUnita, Sessione.getInstance().getStudenteCorrente(), areaSel)) {
+                JOptionPane.showMessageDialog(this,
+                        "Prenotazione effettuata per la fascia oraria " + fasciaUnita,
+                        "Conferma", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Prenotazione non riuscita",
+                        "Continua...", JOptionPane.INFORMATION_MESSAGE);
+            }
+            new FormStudente(session);
+            dispose();
 
         } else {
             if (mostraDialogSeparazione()){
@@ -123,9 +129,9 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
                 JOptionPane.showMessageDialog(this,
                         fasceSelezionate.size() + " prenotazioni effettuate per la fasce orarie " + fasceSelezionate,
                         "Conferma", JOptionPane.INFORMATION_MESSAGE);
-                new FormStudente(session);
-                dispose();
             }
+            new FormStudente(session);
+            dispose();
         }
     }
 

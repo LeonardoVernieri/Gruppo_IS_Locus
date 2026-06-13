@@ -33,12 +33,6 @@ public class GestorePrenotazioni {
 
     // Effettua la prenotazione restituendo TRUE se non ci sono errori
     public boolean effettuaPrenotazione(String nomeSala, LocalDate data, FasciaOraria fascia,  Studente stud, String area){
-        System.out.println("Effettua prenotazioni");
-        System.out.println("NomeSala: " + nomeSala);
-        System.out.println("Data: " + data);
-        System.out.println("Fasce: " + fascia);
-        System.out.println("Area: " + area);
-
         CatalogoPrenotazioni catalogoPrenotazioni = new CatalogoPrenotazioni();
 
         // Recupero l'oggetto SalaStudio
@@ -49,7 +43,7 @@ public class GestorePrenotazioni {
 
         // Creo l'oggetto Prenotazione
         Prenotazione prenotazione = stud.creaPrenotazione(postazione, data, fascia);
-        if(prenotazione == null){
+        if( prenotazione == null ){
             return false;
         }
 
@@ -59,7 +53,7 @@ public class GestorePrenotazioni {
         return true;
     }
 
-    public List <Prenotazione> cercaPrenotazioniAttive(Studente studente) {
+    public List<Prenotazione> cercaPrenotazioniAttive(Studente studente) {
         return catalogoPrenotazioni.getPrenotazioniAttiveOggi(studente);
     }
 

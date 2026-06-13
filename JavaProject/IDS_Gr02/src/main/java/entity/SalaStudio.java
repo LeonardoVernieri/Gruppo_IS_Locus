@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class SalaStudio{
@@ -120,7 +121,6 @@ public class SalaStudio{
         return gestorePersistenza.cercaPrimoPerCampi(Area.class, Map.of("tipologia", tipologiaArea, "salaStudio", this));
     }
 
-
     // Metodi
     public List<Postazione> getPostazioni(Area area) {
         if(area == null){
@@ -161,6 +161,23 @@ public class SalaStudio{
     }
 
     public Postazione cercaPrimaPostazioneLibera(FasciaOraria fascia, String tipologiaArea, LocalDate data) {
+
+        if(tipologiaArea == null){
+            // Prima cerca tra postazioni senza area
+            List<Postazione> tutte = getPostazioni(null);
+
+            List<Postazione> senzaArea = tutte.stream()
+                    .filter(p -> p.getArea() == null)
+                    .toList();
+
+            List<Postazione> daCercare = senzaArea.isEmpty() ? tutte : senzaArea;
+
+            System.out.println(daCercare);
+
+            for (Postazione p : daCercare) {
+                if (p.isDisponibile(fascia, data)) return p;
+            }
+        }
 
         Area area = (tipologiaArea != null)
                 ? getArea(tipologiaArea)
