@@ -134,6 +134,8 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         dispose();
     }
 
+
+    // TODO
     private boolean mostraDialogSeparazione() {
         // logica UI per chiedere all'utente
         return true; // placeholder

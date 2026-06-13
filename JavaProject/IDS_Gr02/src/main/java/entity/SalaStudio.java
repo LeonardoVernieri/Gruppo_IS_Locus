@@ -94,6 +94,10 @@ public class SalaStudio{
         return numeroPostazioni;
     }
 
+    public List<Area> getAree() {
+        return gestorePersistenza.cercaPerCampo(Area.class, "salaStudio", this);
+    }
+
 
     // Metodi
     public List<Postazione> getPostazioni(String area) {
