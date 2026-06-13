@@ -17,12 +17,10 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
     private JPanel prenotaSection;
     private RoundedButton btnPrenota;
 
-    private Sessione session;
-
     // ═════════════════════════════════════════════════════════════════════════
-    public FormEffettuaPrenotazione(Sessione session) {
+    public FormEffettuaPrenotazione() {
 
-        super(session);
+        super();
         // Il costruttore padre costruisce già tutta la UI base.
         // Qui personalizziamo titolo, dimensione e aggiungiamo la sezione area.
         setTitle("Effettua prenotazione");
@@ -118,7 +116,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
                         "Prenotazione non riuscita",
                         "Continua...", JOptionPane.INFORMATION_MESSAGE);
             }
-            new FormStudente(session);
+            new FormStudente();
             dispose();
 
         } else {
@@ -130,7 +128,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
                         fasceSelezionate.size() + " prenotazioni effettuate per la fasce orarie " + fasceSelezionate,
                         "Conferma", JOptionPane.INFORMATION_MESSAGE);
             }
-            new FormStudente(session);
+            new FormStudente();
             dispose();
         }
     }
@@ -168,8 +166,8 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         row.setAlignmentX(Component.LEFT_ALIGNMENT);
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
 
-        btnPrenota = new RoundedButton("Prenota");
-        btnPrenota.setFont(btnPrenota.getFont().deriveFont(Font.BOLD, 13f));
+        btnPrenota = new RoundedButton("Prenota", true);
+        btnPrenota.setFont(FONT_BOLD.deriveFont(13f));
         btnPrenota.setMaximumSize(btnPrenota.getPreferredSize());
         btnPrenota.addActionListener(e -> onPrenota());
 
@@ -184,7 +182,6 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         if (comboArea == null) return;
         comboArea.removeAllItems();
         comboArea.addItem("Nessuna preferenza");
-        System.out.println(nomeSala);
         List<String> aree = gestoreSaleStudio.getAreeSala(nomeSala);
         for (String area : aree) comboArea.addItem(area);
     }

@@ -149,9 +149,6 @@ public class SalaStudio{
                 ? getArea(tipologiaArea)
                 : null;
 
-        // DEBUG
-        System.out.println("FORZA IL NAPOLI" + area);
-
         for (Postazione p : getPostazioni(area)) {
             if (p.isDisponibile(f, data)) {
                 count++;
@@ -171,8 +168,6 @@ public class SalaStudio{
                     .toList();
 
             List<Postazione> daCercare = senzaArea.isEmpty() ? tutte : senzaArea;
-
-            System.out.println(daCercare);
 
             for (Postazione p : daCercare) {
                 if (p.isDisponibile(fascia, data)) return p;

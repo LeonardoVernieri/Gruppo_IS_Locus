@@ -28,8 +28,6 @@ public class CatalogoSalaStudio {
         SalaStudio s = getSalaPerNome(nomeSala);
 
         for ( FasciaOraria fascia : s.getFasceOrarie()){
-            //DEBUG
-            System.out.println("FNS " + s.getPostiLiberi(fascia, date, area));
             fascieOrarie.put(fascia, s.getPostiLiberi(fascia, date, area));
         }
         return fascieOrarie;

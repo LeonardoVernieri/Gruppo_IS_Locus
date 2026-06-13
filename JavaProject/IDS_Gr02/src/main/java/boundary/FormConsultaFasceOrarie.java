@@ -16,21 +16,22 @@ import java.util.List;
 public class FormConsultaFasceOrarie extends JFrame {
 
     // ── Palette (protected così la sottoclasse può usarla) ────────────────────
-    protected static final Color BG_PAGE        = new Color(0xF9F9F8);
+// ── Palette ───────────────────────────────────────────────────────────────
+    protected static final Color BG_PAGE        = new Color(0xF7F7F6);
     protected static final Color BG_CARD        = Color.WHITE;
-    protected static final Color BORDER_LIGHT   = new Color(0xE5E5E3);
-    protected static final Color BLUE_BG        = new Color(0xE6F1FB);
-    protected static final Color BLUE_BORDER    = new Color(0x85B7EB);
-    protected static final Color BLUE_TEXT      = new Color(0x0C447C);
-    protected static final Color GREEN_BG       = new Color(0xEAF3DE);
-    protected static final Color GREEN_TEXT     = new Color(0x3B6D11);
-    protected static final Color AMBER_BG       = new Color(0xFAEEDA);
-    protected static final Color AMBER_TEXT     = new Color(0x854F0B);
-    protected static final Color RED_BG         = new Color(0xFCEBEB);
-    protected static final Color RED_TEXT       = new Color(0xA32D2D);
-    protected static final Color TEXT_PRIMARY   = new Color(0x1A1A18);
-    protected static final Color TEXT_SECONDARY = new Color(0x6B6B68);
-    protected static final Color TEXT_TERTIARY  = new Color(0x9B9B98);
+    protected static final Color BORDER_LIGHT   = new Color(0xEBEBEA);
+    protected static final Color BLUE_BG        = new Color(0xEEF2FF); // indaco chiaro
+    protected static final Color BLUE_BORDER    = new Color(0xA5B4FC); // indaco medio
+    protected static final Color BLUE_TEXT      = new Color(0x4338CA); // indaco scuro
+    protected static final Color GREEN_BG       = new Color(0xECFDF5);
+    protected static final Color GREEN_TEXT     = new Color(0x065F46);
+    protected static final Color AMBER_BG       = new Color(0xFEF3C7);
+    protected static final Color AMBER_TEXT     = new Color(0x92400E);
+    protected static final Color RED_BG         = new Color(0xFEE2E2);
+    protected static final Color RED_TEXT       = new Color(0x991B1B);
+    protected static final Color TEXT_PRIMARY   = new Color(0x111110);
+    protected static final Color TEXT_SECONDARY = new Color(0x52525B);
+    protected static final Color TEXT_TERTIARY  = new Color(0xA1A1AA);
     protected static final double SOGLIA_QUASI_PIENO = 0.35;
 
     // ── Stato (protected per consentire l'override di buildSlotRow) ───────────
@@ -51,13 +52,30 @@ public class FormConsultaFasceOrarie extends JFrame {
     protected LocalDate dataSelezionata = null;
     protected String nomeSala = null;
 
-    private Sessione session;
 
+    // Gestione font
+    protected static Font FONT_REGULAR;
+    protected static Font FONT_BOLD;
+
+    static {
+        try {
+            FONT_REGULAR = Font.createFont(Font.TRUETYPE_FONT,
+                            FormConsultaFasceOrarie.class.getResourceAsStream("/resources/Inter-Regular.ttf"))
+                    .deriveFont(13f);
+            FONT_BOLD = Font.createFont(Font.TRUETYPE_FONT,
+                            FormConsultaFasceOrarie.class.getResourceAsStream("/resources/Inter-Bold.ttf"))
+                    .deriveFont(Font.BOLD, 13f);
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(FONT_REGULAR);
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(FONT_BOLD);
+        } catch (Exception e) {
+            // fallback sicuro se il file non si trova
+            FONT_REGULAR = new Font("Segoe UI", Font.PLAIN, 13);
+            FONT_BOLD = new Font("Segoe UI", Font.BOLD, 13);
+        }
+    }
     // ═════════════════════════════════════════════════════════════════════════
-    public FormConsultaFasceOrarie(Sessione session) {
+    public FormConsultaFasceOrarie() {
         gestoreSaleStudio = new GestoreSaleStudio();
-
-        this.session = session;
 
         setTitle("Fasce orarie disponibili");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,7 +90,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
         // Titolo
         labelTitolo = new JLabel("Consulta fasce orarie disponibili");
-        labelTitolo.setFont(labelTitolo.getFont().deriveFont(Font.BOLD, 18f));
+        labelTitolo.setFont(FONT_BOLD.deriveFont(18f));
         labelTitolo.setForeground(TEXT_PRIMARY);
         labelTitolo.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelConsultaFasceOrarie.add(labelTitolo);
@@ -80,9 +98,9 @@ public class FormConsultaFasceOrarie extends JFrame {
 
         // Bottone torna
         // root.add(Box.createVerticalStrut(8));
-        RoundedButton btnTorna = new RoundedButton("← Torna al menu");
+        RoundedButton btnTorna = new RoundedButton("← Torna al menu", true);
         btnTorna.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btnTorna.addActionListener(e -> { new FormStudente(session); dispose(); });
+        btnTorna.addActionListener(e -> { new FormStudente(); dispose(); });
         panelConsultaFasceOrarie.add(btnTorna);
         panelConsultaFasceOrarie.add(Box.createVerticalStrut(20));
 
@@ -117,7 +135,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
         // Hint iniziale
         hintLabel = new JLabel("Seleziona una sala per vedere le date disponibili.");
-        hintLabel.setFont(hintLabel.getFont().deriveFont(13f));
+        hintLabel.setFont(FONT_REGULAR);
         hintLabel.setForeground(TEXT_TERTIARY);
         hintLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelConsultaFasceOrarie.add(hintLabel);
@@ -134,7 +152,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         for (String nome : gestoreSaleStudio.getNomiSale()) comboSale.addItem(nome);
         comboSale.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
         comboSale.setAlignmentX(Component.LEFT_ALIGNMENT);
-        comboSale.setFont(comboSale.getFont().deriveFont(13f));
+        comboSale.setFont(FONT_REGULAR);
         comboSale.setBackground(BG_CARD);
         comboSale.addActionListener(e -> onSalaSelezionata());
         return comboSale;
@@ -318,9 +336,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         if (comboArea == null) return;
         comboArea.removeAllItems();
         comboArea.addItem("Nessuna preferenza");
-        System.out.println(nomeSala);
         List<String> aree = gestoreSaleStudio.getAreeSala(nomeSala);
-        System.out.println(aree);
         for (String area : aree) comboArea.addItem(area);
     }
 
@@ -334,7 +350,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 52));
 
         JLabel orario = new JLabel(fascia.toString());
-        orario.setFont(orario.getFont().deriveFont(Font.PLAIN, 14f));
+        orario.setFont(FONT_REGULAR.deriveFont(14f));
         orario.setForeground(TEXT_PRIMARY);
         row.add(orario, BorderLayout.WEST);
 
@@ -342,7 +358,7 @@ public class FormConsultaFasceOrarie extends JFrame {
         destra.setOpaque(false);
 
         JLabel postiLabel = new JLabel(liberi + " / " + totale + " postazioni libere");
-        postiLabel.setFont(postiLabel.getFont().deriveFont(12f));
+        postiLabel.setFont(FONT_REGULAR.deriveFont(12f));
         postiLabel.setForeground(TEXT_SECONDARY);
         destra.add(postiLabel);
         destra.add(buildBadgePill(liberi, totale));
@@ -381,7 +397,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
     protected JLabel buildSectionLabel(String testo) {
         JLabel lbl = new JLabel(testo.toUpperCase());
-        lbl.setFont(lbl.getFont().deriveFont(Font.PLAIN, 10.5f));
+        lbl.setFont(FONT_REGULAR.deriveFont(10.5f));
         lbl.setForeground(TEXT_TERTIARY);
         lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
         return lbl;
@@ -393,6 +409,7 @@ public class FormConsultaFasceOrarie extends JFrame {
 
     protected static class DateButton extends JButton {
         private boolean selected = false;
+        private boolean hovered = false;
         private final String giorno;
         private final String numero;
 
@@ -405,7 +422,23 @@ public class FormConsultaFasceOrarie extends JFrame {
             setContentAreaFilled(false);
             setBorderPainted(false);
             setOpaque(false);
+            setFont(FONT_REGULAR);
             setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent e) {
+                    System.out.println("entered");
+                    hovered = true;
+                    repaint();
+                }
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent e) {
+                    System.out.println("exited");
+                    hovered = false;
+                    repaint();
+                }
+            });
         }
 
         public void setSelected(boolean sel) {
@@ -426,9 +459,12 @@ public class FormConsultaFasceOrarie extends JFrame {
                 g2.setStroke(new BasicStroke(1f));
                 g2.draw(new RoundRectangle2D.Float(0.5f, 0.5f, getWidth() - 1, getHeight() - 1, 10, 10));
             } else {
-                g2.setColor(BG_CARD);
+                Color sfondo = hovered ? new Color(0xEEF2FF) : BG_CARD;
+                Color bordo  = hovered ? new Color(0x6366F1) : BORDER_LIGHT;
+
+                g2.setColor(sfondo);
                 g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 10, 10));
-                g2.setColor(BORDER_LIGHT);
+                g2.setColor(bordo);
                 g2.setStroke(new BasicStroke(0.8f));
                 g2.draw(new RoundRectangle2D.Float(0.5f, 0.5f, getWidth() - 1, getHeight() - 1, 10, 10));
             }
@@ -484,7 +520,7 @@ public class FormConsultaFasceOrarie extends JFrame {
             super(testo);
             this.bg = bg;
             setForeground(fg);
-            setFont(getFont().deriveFont(Font.PLAIN, 11f));
+            setFont(FONT_REGULAR);
             setBorder(new EmptyBorder(3, 10, 3, 10));
             setOpaque(false);
         }
@@ -501,34 +537,58 @@ public class FormConsultaFasceOrarie extends JFrame {
     }
 
     protected static class RoundedButton extends JButton {
+
+        private boolean hovered = false;
+        private final boolean filled; // ← nuovo
+
         RoundedButton(String testo) {
+            this(testo, false); // default: stile outline
+        }
+        RoundedButton(String testo, boolean filled) {
             super(testo);
+            this.filled = filled;
             setFocusPainted(false);
             setContentAreaFilled(false);
             setBorderPainted(false);
             setOpaque(false);
             setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            setFont(getFont().deriveFont(Font.PLAIN, 13f));
+            setFont(FONT_REGULAR.deriveFont(11f));
             setBorder(new EmptyBorder(7, 16, 7, 16));
+            if (filled) setForeground(Color.WHITE); // testo bianco
+
+            addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent e) {
+                    hovered = true; repaint();
+                }
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent e) {
+                    hovered = false; repaint();
+                }
+            });
         }
 
         @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(BG_CARD);
+
+            Color sfondo, bordo;
+            if (filled) {
+                sfondo = hovered ? new Color(0x4F46E5) : new Color(0x6366F1); // filled indaco
+                bordo  = sfondo;
+            } else {
+                sfondo = hovered ? new Color(0xEEF2FF) : BG_CARD;             // outline originale
+                bordo  = hovered ? new Color(0x6366F1) : BORDER_LIGHT;
+            }
+
+            g2.setColor(sfondo);
             g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), getHeight(), getHeight()));
-            g2.setColor(BORDER_LIGHT);
+            g2.setColor(bordo);
             g2.setStroke(new BasicStroke(0.8f));
             g2.draw(new RoundRectangle2D.Float(0.5f, 0.5f, getWidth() - 1, getHeight() - 1, getHeight(), getHeight()));
             g2.dispose();
             super.paintComponent(g);
         }
-    }
-
-    static void main() {
-        FormConsultaFasceOrarie formConsultaFasceOrarie = new FormConsultaFasceOrarie(null);
-        formConsultaFasceOrarie.setVisible(true);
-        formConsultaFasceOrarie.pack();
     }
 }

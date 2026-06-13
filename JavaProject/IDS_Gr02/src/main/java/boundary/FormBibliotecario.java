@@ -1,42 +1,81 @@
 package boundary;
 
-import  javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import control.Sessione;
 
-public class FormBibliotecario extends JFrame{
-    private JPanel contentPane;
-    private JLabel titoloBibliotecario;
-    private JButton btnCrea;
-    private JButton btnModifica;
-    private JButton btnElimina;
-    private JButton monitoraggioAndamentoSaleButton;
-    private JButton visualizzaStoricoPrenotazioniButton;
-    private Sessione session;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
-    public FormBibliotecario(Sessione session) {
-        setTitle("Bibliotecario");
-        setContentPane(contentPane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+public class FormBibliotecario extends BaseForm {
+
+
+    public FormBibliotecario() {
+        super("Bibliotecario", 420, 500);
+
+        // ── Root ─────────────────────────────────────────────────────────────
+        JPanel root = new JPanel(new GridBagLayout());
+        root.setBackground(BG_PAGE);
+        setContentPane(root);
+
+        // ── Card ─────────────────────────────────────────────────────────────
+        RoundedCard card = new RoundedCard();
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setBorder(new EmptyBorder(32, 32, 32, 32));
+        card.setPreferredSize(new Dimension(340, 400));
+
+        // Titolo
+        JLabel titolo = new JLabel("Pannello Bibliotecario");
+        titolo.setFont(FONT_BOLD.deriveFont(20f));
+        titolo.setForeground(TEXT_PRIMARY);
+        titolo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        card.add(titolo);
+
+        JLabel sottotitolo = new JLabel("Cosa vuoi fare?");
+        sottotitolo.setFont(FONT_REGULAR.deriveFont(12f));
+        sottotitolo.setForeground(TEXT_TERTIARY);
+        sottotitolo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        card.add(sottotitolo);
+        card.add(Box.createVerticalStrut(28));
+
+        // Bottoni
+        card.add(buildMenuButton("Crea sala", true, e -> {
+            new FormCreaSala().setVisible(true);
+            setVisible(false);
+        }));
+        card.add(Box.createVerticalStrut(10));
+
+        card.add(buildMenuButton("Modifica sala", false, e -> mostraFunzioneProssimamente()));
+        card.add(Box.createVerticalStrut(10));
+
+        card.add(buildMenuButton("Elimina sala", false, e -> mostraFunzioneProssimamente()));
+        card.add(Box.createVerticalStrut(10));
+
+        card.add(buildMenuButton("Monitoraggio andamento sale", false, e -> mostraFunzioneProssimamente()));
+        card.add(Box.createVerticalStrut(10));
+
+        card.add(buildMenuButton("Visualizza storico prenotazioni", false, e -> mostraFunzioneProssimamente()));
+
+        root.add(card);
         pack();
-        this.session = session;
-        
         setLocationRelativeTo(null);
-
-        btnCrea.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FormCreaSala creaSala = new FormCreaSala(FormBibliotecario.this, session);
-                creaSala.setVisible(true);
-                setVisible(false);
-            }
-        });
+        setVisible(true);
     }
 
-    /*public static void main(String[] args){
-        FormBibliotecario form = new FormBibliotecario();
-        form.setVisible(true);
-    }*/
+    // ── Helper ───────────────────────────────────────────────────────────────
+
+    private RoundedButton buildMenuButton(String testo, boolean filled,
+                                          java.awt.event.ActionListener listener) {
+        RoundedButton btn = new RoundedButton(testo, filled);
+        btn.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 42));
+        btn.addActionListener(listener);
+        return btn;
+    }
+
+    private void mostraFunzioneProssimamente() {
+        JOptionPane.showMessageDialog(this,
+                "Questa funzione verrà aggiunta a breve...",
+                "In arrivo",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 }
