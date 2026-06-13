@@ -209,4 +209,29 @@ public class GestorePersistenza {
         return risultati.get(0);
     }
 
+    public void aggiorna(Object oggetto) {
+
+        EntityManager em = JpaUtil.getInstance().getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+
+            em.merge(oggetto);
+
+            em.getTransaction().commit();
+
+        } catch (RuntimeException e) {
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
+            throw e;
+
+        } finally {
+            em.close();
+        }
+    }   //metodo per aggiornare gli oggetti
+
+
 }

@@ -11,8 +11,10 @@ import java.util.Set;
 public class GestorePrenotazioni {
 
     private CatalogoSalaStudio catalogoSalaStudio;
+    private CatalogoPrenotazioni catalogoPrenotazioni;
 
     public GestorePrenotazioni() {
+        catalogoPrenotazioni  = new CatalogoPrenotazioni();
         catalogoSalaStudio = new CatalogoSalaStudio();
     }
 
@@ -55,6 +57,16 @@ public class GestorePrenotazioni {
         catalogoPrenotazioni.registraPrenotazione(prenotazione);
 
         return true;
+    }
+
+    public List <Prenotazione> cercaPrenotazioniAttive(Studente studente) {
+        return catalogoPrenotazioni.getPrenotazioniAttiveOggi(studente);
+    }
+
+
+    public void effettuaCheckIn(Prenotazione prenotazione) {
+        prenotazione.conferma();
+        catalogoPrenotazioni.aggiornaPrenotazione(prenotazione);
     }
 
 

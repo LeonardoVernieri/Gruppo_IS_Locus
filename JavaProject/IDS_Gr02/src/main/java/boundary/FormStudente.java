@@ -89,5 +89,13 @@ public class FormStudente extends JFrame {
                 frame.dispose();
             }
         });
+
+        effettuaCheckInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FormCheckIn checkIn = new FormCheckIn(session);
+                frame.setVisible(false);
+            }
+        });
     }
 }
