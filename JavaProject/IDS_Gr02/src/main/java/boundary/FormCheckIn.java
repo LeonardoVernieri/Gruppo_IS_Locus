@@ -15,7 +15,7 @@ public class FormCheckIn extends BaseForm {
     private final GestorePrenotazioni    gestorePrenotazioni;
 
     public FormCheckIn() {
-        super("Check-In");
+        super();
 
         gestorePrenotazioni = new GestorePrenotazioni();
 

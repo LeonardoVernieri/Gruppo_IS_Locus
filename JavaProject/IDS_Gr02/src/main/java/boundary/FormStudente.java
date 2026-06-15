@@ -9,7 +9,7 @@ import java.awt.*;
 public class FormStudente extends BaseForm {
 
     public FormStudente() {
-        super("Studente", 420, 500);
+        super( 420, 500);
 
         // ── Root ─────────────────────────────────────────────────────────────
         JPanel root = new JPanel(new GridBagLayout());

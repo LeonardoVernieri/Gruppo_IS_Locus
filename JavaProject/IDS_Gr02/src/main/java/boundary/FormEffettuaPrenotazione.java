@@ -27,7 +27,7 @@ public class FormEffettuaPrenotazione extends FormConsultaFasceOrarie {
         super();
         // Il costruttore padre costruisce già tutta la UI base.
         // Qui personalizziamo titolo, dimensione e aggiungiamo la sezione area.
-        setTitle("Effettua prenotazione");
+        setTitle("Gestore sale studio");
         setSize(660, 640);
 
         // Aggiorna l'header fasce per indicare la selezione multipla

@@ -7,7 +7,7 @@ import java.awt.*;
 public class FormSplash extends BaseForm {
 
     public FormSplash() {
-        super("Benvenuto");
+        super();
 
         // ── Root ─────────────────────────────────────────────────────────────
         JPanel root = new JPanel(new GridBagLayout());

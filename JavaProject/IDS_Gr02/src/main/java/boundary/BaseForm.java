@@ -50,28 +50,28 @@ public abstract class BaseForm extends JFrame {
     }
 
     // ── Costruttore ───────────────────────────────────────────────────────────
-    protected BaseForm(String titolo, int width, int height) {
+    protected BaseForm(int width, int height) {
 
         java.net.URL urlIcona = getClass().getResource("/icons/logo.png");
         if (urlIcona != null) {
             setIconImage(new ImageIcon(urlIcona).getImage());
         }
 
-        setTitle(titolo);
+        setTitle("Gestore sale studio");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
         getContentPane().setBackground(BG_PAGE);
     }
 
-    protected BaseForm(String titolo) {
+    protected BaseForm() {
 
         java.net.URL urlIcona = getClass().getResource("/icons/logo.png");
         if (urlIcona != null) {
             setIconImage(new ImageIcon(urlIcona).getImage());
         }
 
-        setTitle(titolo);
+        setTitle("Gestore sale studio");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(BG_PAGE);

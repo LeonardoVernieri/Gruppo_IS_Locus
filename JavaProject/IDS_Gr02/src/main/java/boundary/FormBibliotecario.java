@@ -10,7 +10,7 @@ public class FormBibliotecario extends BaseForm {
 
 
     public FormBibliotecario() {
-        super("Bibliotecario", 420, 500);
+        super( 420, 500);
 
         // ── Root ─────────────────────────────────────────────────────────────
         JPanel root = new JPanel(new GridBagLayout());

@@ -31,7 +31,7 @@ public class FormCreaSala extends BaseForm {
 
 
     public FormCreaSala() {
-        super("Crea sala", 480, 620);
+        super();
 
         // ── Root ─────────────────────────────────────────────────────────────
         JPanel root = new JPanel(new GridBagLayout());

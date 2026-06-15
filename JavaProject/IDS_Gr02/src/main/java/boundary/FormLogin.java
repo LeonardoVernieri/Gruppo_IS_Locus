@@ -18,7 +18,7 @@ public class FormLogin extends BaseForm {
     private final GestoreAccesso gestoreAccesso = new GestoreAccesso();
 
     public FormLogin() {
-        super("Login", 400, 460);
+        super(400, 460);
 
         // ── Root ─────────────────────────────────────────────────────────────
         JPanel root = new JPanel(new GridBagLayout());

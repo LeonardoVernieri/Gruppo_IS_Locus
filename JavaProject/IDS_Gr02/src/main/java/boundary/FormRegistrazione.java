@@ -20,7 +20,7 @@ public class FormRegistrazione extends BaseForm {
     private final FormLogin parent;
 
     public FormRegistrazione(FormLogin parent) {
-        super("Registrazione", 0, 0);
+        super( 0, 0);
         this.parent = parent;
 
         // ── Root ─────────────────────────────────────────────────────────────

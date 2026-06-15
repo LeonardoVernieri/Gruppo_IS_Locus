@@ -77,7 +77,7 @@ public class FormConsultaFasceOrarie extends JFrame {
     public FormConsultaFasceOrarie() {
         gestoreSaleStudio = new GestoreSaleStudio();
 
-        setTitle("Fasce orarie disponibili");
+        setTitle("Gestore sale studio");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(660, 700);
         setLocationRelativeTo(null);
