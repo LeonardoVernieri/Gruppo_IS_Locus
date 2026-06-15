@@ -70,4 +70,9 @@ public class GestorePrenotazioni {
         prenotazione.setDataCheckIn(LocalTime.now());
         catalogoPrenotazioni.aggiornaPrenotazione(prenotazione);
     }
+
+    public boolean isPrenotazioneScaduta(Prenotazione p) {
+        return p.isScaduta();
+    }
+
 }

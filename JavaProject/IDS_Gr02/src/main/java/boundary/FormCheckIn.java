@@ -120,7 +120,7 @@ public class FormCheckIn extends BaseForm {
                     "Attenzione", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (selezionata.isScaduta()) {
+        if (gestorePrenotazioni.isPrenotazioneScaduta(selezionata)) {
             JOptionPane.showMessageDialog(this,
                     "Impossibile effettuare il check-in: prenotazione scaduta!",
                     "Errore", JOptionPane.ERROR_MESSAGE);
