@@ -68,6 +68,8 @@ public class GestorePrenotazioni {
         catalogoPrenotazioni.aggiornaPrenotazione(prenotazione);
     }
 
-
+    public boolean isPrenotazioneScaduta(Prenotazione p) {
+        return p.isScaduta();
+    }
 
 }
