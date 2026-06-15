@@ -29,9 +29,12 @@ public class FormCreaSala extends BaseForm {
 
     private DefaultTableModel tableModel;
 
+    private GestoreSaleStudio gestoreSaleStudio;
+
 
     public FormCreaSala() {
-        super();
+        super(480, 620);
+        gestoreSaleStudio = new GestoreSaleStudio();
 
         // ── Root ─────────────────────────────────────────────────────────────
         JPanel root = new JPanel(new GridBagLayout());
@@ -305,7 +308,7 @@ public class FormCreaSala extends BaseForm {
         }
 
         if (sblocco) {
-            boolean esito = GestoreSaleStudio.aggiungiSalaStudio(
+            boolean esito = gestoreSaleStudio.aggiungiSalaStudio(
                     nome, desc, numPost, apertura, chiusura, presenzaAree, col1, col2);
             if (esito) JOptionPane.showMessageDialog(null, "Sala creata correttamente");
             else       JOptionPane.showMessageDialog(null, "Sala non creata correttamente");

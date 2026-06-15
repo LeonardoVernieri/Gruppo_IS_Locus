@@ -110,7 +110,7 @@ public class GestoreSaleStudio {
      * @param col2                   lista del numero di postazioni per ciascuna area
      * @return {@code true} se la sala è stata creata con successo, {@code false} altrimenti
      */
-    public static boolean aggiungiSalaStudio(String nome,
+    public boolean aggiungiSalaStudio(String nome,
                                              String descrizione,
                                              int numeroPostazioniTotali,
                                              LocalTime orarioApertura,
