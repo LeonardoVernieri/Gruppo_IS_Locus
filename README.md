@@ -50,14 +50,14 @@ scelta dell'applicazione.
 
 ---
 
-## 🚀 Setup Rapido
+## Setup Rapido
 
 ### Requirements
 - Java 26+ (openjdk)
 - Maven 3.6+
 - MySQL 8.0+ (running on localhost:3306)
 
-### Installation
+### Installazione
 
 **1. Clone il repository:**
 ```bash
