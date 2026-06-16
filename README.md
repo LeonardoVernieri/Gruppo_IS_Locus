@@ -64,6 +64,7 @@ scelta dell'applicazione.
 git clone https://github.com/LeonardoVernieri/Gruppo_IS_Locus.git
 cd Gruppo_IS_Locus
 ```
+Per la configurazione del sistema ci sono due possibili risoluzioni
 ## Soluzione 1
 **2. Configura il database:**
 
