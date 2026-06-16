@@ -52,17 +52,21 @@ scelta dell'applicazione.
 
 ## 🚀 Guida all'Installazione e Configurazione
 
-### Prerequisiti
+### Prerequisiti Generali
 - **Java 26** (o versione compatibile)
 - **Maven 3.6+**
 - **MySQL Server** installato e in esecuzione su `localhost:3306`
 
+---
+
+## 💻 Windows Users
+
 ### Configurazione del Database
 
 1. **Copia il file di configurazione template:**
-   ```bash
-   cp JavaProject/IDS_Gr02/src/main/resources/database.properties.example \
-      JavaProject/IDS_Gr02/src/main/resources/database.properties
+   ```cmd
+   copy JavaProject\IDS_Gr02\src\main\resources\database.properties.example ^
+         JavaProject\IDS_Gr02\src\main\resources\database.properties
    ```
 
 2. **Modifica il file `database.properties` con le credenziali del tuo MySQL:**
@@ -76,6 +80,161 @@ scelta dell'applicazione.
    > **Nota:** Sostituisci `TUA_PASSWORD_MYSQL` con la password del tuo utente MySQL.
 
 3. **Il database `biblioteca_db` verrà creato automaticamente** al primo avvio dell'applicazione.
+
+### Build e Esecuzione
+
+**Build del progetto:**
+```cmd
+mvn clean package -f JavaProject\IDS_Gr02\pom.xml
+```
+
+**Esecuzione del JAR:**
+```cmd
+java -jar JavaProject\IDS_Gr02\target\Locus-executable.jar
+```
+
+---
+
+## 🍎 macOS Users
+
+### Prerequisiti Aggiuntivi per Mac
+
+Se non hai ancora installato Java e Maven su Mac, puoi usare **Homebrew**:
+
+```bash
+# Installare Homebrew (se non lo hai già)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Installare Java 26
+brew install openjdk@26
+
+# Installare Maven
+brew install maven
+
+# Verificare le installazioni
+java -version
+mvn -version
+```
+
+### Configurazione del Database
+
+1. **Installa MySQL Server** (se non lo hai già):
+   ```bash
+   # Usando Homebrew
+   brew install mysql
+   
+   # Avviare il servizio MySQL
+   brew services start mysql
+   ```
+
+2. **Copia il file di configurazione template:**
+   ```bash
+   cp JavaProject/IDS_Gr02/src/main/resources/database.properties.example \
+      JavaProject/IDS_Gr02/src/main/resources/database.properties
+   ```
+
+3. **Modifica il file `database.properties` con le credenziali del tuo MySQL:**
+   
+   Apri il file con un editor di testo:
+   ```bash
+   nano JavaProject/IDS_Gr02/src/main/resources/database.properties
+   ```
+   
+   E modifica il contenuto:
+   ```properties
+   db.driver=com.mysql.cj.jdbc.Driver
+   db.url=jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true
+   db.username=root
+   db.password=TUA_PASSWORD_MYSQL
+   ```
+   
+   > **Nota:** Sostituisci `TUA_PASSWORD_MYSQL` con la password del tuo utente MySQL.
+   > 
+   > Per salvare su nano: premi `Ctrl + X`, poi `Y` per confermare, e `Enter` per salvare.
+
+4. **Il database `biblioteca_db` verrà creato automaticamente** al primo avvio dell'applicazione.
+
+### Build e Esecuzione
+
+**Build del progetto:**
+```bash
+mvn clean package -f JavaProject/IDS_Gr02/pom.xml
+```
+
+**Esecuzione del JAR:**
+```bash
+java -jar JavaProject/IDS_Gr02/target/Locus-executable.jar
+```
+
+### Troubleshooting per macOS
+
+**Problema: "Permission denied" durante l'esecuzione del jar**
+```bash
+# Dai i permessi di esecuzione
+chmod +x JavaProject/IDS_Gr02/target/Locus-executable.jar
+
+# Poi riprova
+java -jar JavaProject/IDS_Gr02/target/Locus-executable.jar
+```
+
+**Problema: MySQL non si connette**
+```bash
+# Verificare che MySQL sia in esecuzione
+brew services list
+
+# Riavviare il servizio MySQL se necessario
+brew services restart mysql
+```
+
+**Problema: Java non trovato**
+```bash
+# Aggiungere Java al PATH
+export PATH="/usr/local/opt/openjdk@26/bin:$PATH"
+
+# Rendere permanente (aggiungi al file ~/.zshrc)
+echo 'export PATH="/usr/local/opt/openjdk@26/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+---
+
+## 🐧 Linux Users
+
+### Prerequisiti Aggiuntivi per Linux
+
+Se non hai ancora installato Java e Maven su Linux:
+
+```bash
+# Per Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install openjdk-26-jdk maven mysql-server
+
+# Per Fedora/CentOS
+sudo dnf install java-26-openjdk java-26-openjdk-devel maven mysql-server
+
+# Avviare il servizio MySQL
+sudo systemctl start mysql
+sudo systemctl enable mysql  # Per avviarlo automaticamente al boot
+
+# Verificare le installazioni
+java -version
+mvn -version
+```
+
+### Configurazione del Database
+
+1. **Copia il file di configurazione template:**
+   ```bash
+   cp JavaProject/IDS_Gr02/src/main/resources/database.properties.example \
+      JavaProject/IDS_Gr02/src/main/resources/database.properties
+   ```
+
+2. **Modifica il file `database.properties` con le tue credenziali MySQL:**
+   ```bash
+   nano JavaProject/IDS_Gr02/src/main/resources/database.properties
+   ```
+
+3. **Il database `biblioteca_db` verrà creato automaticamente** al primo avvio.
 
 ### Build e Esecuzione
 
