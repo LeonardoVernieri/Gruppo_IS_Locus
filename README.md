@@ -90,10 +90,12 @@ java -jar JavaProject/IDS_Gr02/target/Locus-executable.jar
 In alternativa alla Soluzione 1 andare in `JavaProject\IDS_Gr02\src\main\resources\META-INF` e modificare le proprietà del file `persistence.xml`
 
 ```xml
+...
 <property name="jakarta.persistence.jdbc.user"
                       value="mysql_user"/>
 <property name="jakarta.persistence.jdbc.password"
                       value="mysql_password"/>
+...
 ```
 Fatto ciò, lanciare i comandi da terminale dello step 3.
 
