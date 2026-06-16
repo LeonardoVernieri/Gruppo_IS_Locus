@@ -67,32 +67,24 @@ cd Gruppo_IS_VernieriLeonardo
 
 **2. Configura il database:**
 
-Imposta le seguenti variabili d'ambiente prima di eseguire l'applicazione:
+Copia il file di esempio e modifica le credenziali:
 
 ```bash
-export DB_DRIVER=com.mysql.cj.jdbc.Driver
-export DB_URL=jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true
-export DB_USERNAME=root
-export DB_PASSWORD=your_mysql_password
+cp database.properties.example database.properties
 ```
 
-Oppure, per Windows (cmd):
-```cmd
-set DB_DRIVER=com.mysql.cj.jdbc.Driver
-set DB_URL=jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true
-set DB_USERNAME=root
-set DB_PASSWORD=your_mysql_password
-```
+Apri `database.properties` e modifica con le tue credenziali MySQL:
 
-Oppure per PowerShell:
-```powershell
-$env:DB_DRIVER="com.mysql.cj.jdbc.Driver"
-$env:DB_URL="jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true"
-$env:DB_USERNAME="root"
-$env:DB_PASSWORD="your_mysql_password"
+```properties
+db.driver=com.mysql.cj.jdbc.Driver
+db.url=jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true
+db.username=root
+db.password=your_mysql_password
 ```
 
 Il database viene creato automaticamente al primo avvio se non esiste.
+
+> ⚠️ **Nota:** `database.properties` è incluso in `.gitignore` - non commitare mai le tue credenziali!
 
 **3. Build e Run:**
 ```bash
