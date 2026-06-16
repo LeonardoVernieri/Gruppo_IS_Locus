@@ -1,4 +1,4 @@
-# Gruppo_IS_VernieriLeonardo
+# Gruppo_IS_Locus
 ## Traccia esame
 ### Sistema di Prenotazione di Postazioni in Biblioteca Universitaria
 Si desidera sviluppare un sistema software per la gestione della prenotazione di postazioni di studio all'interno di
@@ -59,12 +59,12 @@ scelta dell'applicazione.
 
 ### Installazione
 
-**1. Clone il repository:**
+**1. Clonare il repository:**
 ```bash
-git clone https://github.com/LeonardoVernieri/Gruppo_IS_VernieriLeonardo.git
-cd Gruppo_IS_VernieriLeonardo
+git clone https://github.com/LeonardoVernieri/Gruppo_IS_Locus.git
+cd Gruppo_IS_Locus
 ```
-
+## Soluzione 1
 **2. Configura il database:**
 
 Apri `database.properties` e modifica con le tue credenziali MySQL:
@@ -72,27 +72,30 @@ Apri `database.properties` e modifica con le tue credenziali MySQL:
 ```properties
 db.driver=com.mysql.cj.jdbc.Driver
 db.url=jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true
-db.username=root
+db.username=mysql_user
 db.password=your_mysql_password
 ```
-
-Oppure in alternativa andare in `JavaProject\IDS_Gr02\src\main\resources\META-INF` e modificare le proprietà del file `persistence.xml`
-
-```xml
-<property name="jakarta.persistence.jdbc.user"
-                      value="vostro nome utente"/>
-<property name="jakarta.persistence.jdbc.password"
-                      value="vostra password"/>
-```
-
 Il database viene creato automaticamente al primo avvio se non esiste.
 
 **3. Build e Run:**
-Lanciare entrambi i comandi dal cmd di Windows all'interno della cartella padre clonata dalla repository
+Lanciare entrambi i comandi dal terminale trovandosi all'interno della cartella padre clonata dalla repository
 ```bash
 mvn clean package -f JavaProject/IDS_Gr02/pom.xml
+```
+```bash
 java -jar JavaProject/IDS_Gr02/target/Locus-executable.jar
 ```
+
+## Soluzione 2
+In alternativa alla Soluzione 1 andare in `JavaProject\IDS_Gr02\src\main\resources\META-INF` e modificare le proprietà del file `persistence.xml`
+
+```xml
+<property name="jakarta.persistence.jdbc.user"
+                      value="mysql_user"/>
+<property name="jakarta.persistence.jdbc.password"
+                      value="mysql_password"/>
+```
+Fatto ciò, lanciare i comandi da terminale dello step 3.
 
 ---
 
