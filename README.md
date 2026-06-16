@@ -76,9 +76,19 @@ db.username=root
 db.password=your_mysql_password
 ```
 
+Oppure in alternativa andare in `JavaProject\IDS_Gr02\src\main\resources\META-INF` e modificare le proprietà del file `persistence.xml`
+
+```xml
+<property name="jakarta.persistence.jdbc.user"
+                      value="vostro nome utente"/>
+<property name="jakarta.persistence.jdbc.password"
+                      value="vostra password"/>
+```
+
 Il database viene creato automaticamente al primo avvio se non esiste.
 
 **3. Build e Run:**
+Lanciare entrambi i comandi dal cmd di Windows all'interno della cartella padre clonata dalla repository
 ```bash
 mvn clean package -f JavaProject/IDS_Gr02/pom.xml
 java -jar JavaProject/IDS_Gr02/target/Locus-executable.jar
