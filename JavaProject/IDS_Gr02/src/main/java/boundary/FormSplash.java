@@ -46,7 +46,7 @@ public class FormSplash extends BaseForm {
         card.add(Box.createVerticalStrut(20));
 
         // Titolo
-        JLabel titolo = new JLabel("Sale Studio", SwingConstants.CENTER);
+        JLabel titolo = new JLabel("Locus", SwingConstants.CENTER);
         titolo.setFont(FONT_BOLD.deriveFont(26f));
         titolo.setForeground(TEXT_PRIMARY);
         titolo.setAlignmentX(Component.CENTER_ALIGNMENT);
