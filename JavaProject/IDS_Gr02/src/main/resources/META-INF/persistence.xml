@@ -18,9 +18,9 @@ https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:mysql://127.0.0.1:3306/biblioteca_db?createDatabaseIfNotExist=true"/>
             <property name="jakarta.persistence.jdbc.user"
-                      value="root"/>
+                      value=""/>
             <property name="jakarta.persistence.jdbc.password"
-                      value="wasd"/>
+                      value=""/>
             <property name="hibernate.hbm2ddl.auto"
                       value="update"/>
             <property name="hibernate.show_sql"
